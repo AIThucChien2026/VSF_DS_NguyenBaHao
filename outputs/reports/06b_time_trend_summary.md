@@ -42,9 +42,28 @@
 |   2021 | 1.04304e+09 | 9.4113e+08  |    1.0191e+08  | 0.0791571 |         -1.08793  |
 |   2022 | 1.16975e+09 | 1.02042e+09 |    1.49329e+08 | 0.120897  |         12.1481   |
 
+## Recent Monthly Return Rates
+
+| month               |   orders |   returned_orders |   return_activity_rate_pct |   cohort_returned_orders |   cohort_return_rate_pct |
+|:--------------------|---------:|------------------:|---------------------------:|-------------------------:|-------------------------:|
+| 2022-01-01 00:00:00 |     1719 |               127 |                    7.38802 |                      100 |                  5.81734 |
+| 2022-02-01 00:00:00 |     2182 |                88 |                    4.033   |                      111 |                  5.08708 |
+| 2022-03-01 00:00:00 |     4231 |               153 |                    3.61617 |                      223 |                  5.27062 |
+| 2022-04-01 00:00:00 |     4489 |               243 |                    5.41323 |                      246 |                  5.48006 |
+| 2022-05-01 00:00:00 |     4076 |               246 |                    6.03533 |                      218 |                  5.34838 |
+| 2022-06-01 00:00:00 |     4068 |               212 |                    5.21141 |                      212 |                  5.21141 |
+| 2022-07-01 00:00:00 |     3122 |               226 |                    7.23895 |                      212 |                  6.79052 |
+| 2022-08-01 00:00:00 |     3274 |               191 |                    5.83384 |                      184 |                  5.62004 |
+| 2022-09-01 00:00:00 |     2643 |               177 |                    6.69694 |                      165 |                  6.24291 |
+| 2022-10-01 00:00:00 |     2097 |               149 |                    7.10539 |                      132 |                  6.29471 |
+| 2022-11-01 00:00:00 |     1703 |               124 |                    7.28127 |                       96 |                  5.63711 |
+| 2022-12-01 00:00:00 |     2400 |               110 |                    4.58333 |                       43 |                  1.79167 |
+
 ## Notes
 
 - `sales.csv` is the central table for Revenue/COGS trend analysis.
 - Daily, weekly, monthly, and yearly summaries are saved separately.
 - Other dated tables are summarized at their own grain; no broad joins are used.
+- Return rate uses two views: `return_activity_rate_pct` by return month, and `cohort_return_rate_pct` by original order month.
+- `refund_amount` remains in `06b_returns_monthly.csv` as financial impact, but the return trend chart uses rates.
 - This step describes trend and seasonality candidates only; it does not build forecasts.

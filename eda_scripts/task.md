@@ -32,6 +32,7 @@ Dữ liệu bao phủ từ ngày nào đến ngày nào?
 Có thiếu ngày/tháng không?
 Doanh thu tăng/giảm theo thời gian?
 Có seasonality không?
+=> khám phá phân phối dữ liệu và khám phá thời gian là script 6
 
 ## 5. Khám phá mối quan hệ giữa các biến
 
