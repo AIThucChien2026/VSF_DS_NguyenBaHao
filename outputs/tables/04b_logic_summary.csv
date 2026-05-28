@@ -1,0 +1,27 @@
+﻿table,rule_name,description,checked_rows,violated_rows,violation_pct,status
+order_items,quantity > 0,Quantity must be greater than 0.,714669,0,0.0,PASS
+order_items,unit_price > 0,Unit price must be greater than 0.,714669,0,0.0,PASS
+order_items,discount_amount >= 0,Discount amount cannot be negative.,714669,0,0.0,PASS
+order_items,discount_amount <= quantity * unit_price,Discount amount cannot exceed gross item value.,714669,0,0.0,PASS
+orders,"order_date in [04-07-2012, 31-12-2022]",Order date must be within the configured valid data range.,646945,0,0.0,PASS
+products,price > 0,Product price must be greater than 0.,2412,0,0.0,PASS
+products,cogs >= 0,Product COGS cannot be negative.,2412,0,0.0,PASS
+products,price >= cogs,Product price should not be lower than COGS.,2412,0,0.0,PASS
+payments,payment_value > 0,Payment value must be greater than 0.,646945,0,0.0,PASS
+promotions,end_date >= start_date,Promotion end date must be greater than or equal to start date.,50,0,0.0,PASS
+promotions,discount_value > 0,Promotion discount value must be greater than 0.,50,0,0.0,PASS
+promotions,"percentage discount_value in (0, 1]","Assumption: rate/percentage discounts are stored as decimal values, so discount_value should be in (0, 1].",50,0,0.0,PASS
+promotions,min_order_value >= 0,Minimum order value cannot be negative.,50,0,0.0,PASS
+returns,refund_amount >= 0,Refund amount cannot be negative.,39939,0,0.0,PASS
+returns,return_quantity > 0,Return quantity must be greater than 0.,39939,0,0.0,PASS
+reviews,"rating in [1, 5]",Review rating must be between 1 and 5.,113551,0,0.0,PASS
+shipments,delivery_date >= ship_date,Delivery date must be greater than or equal to ship date.,566067,0,0.0,PASS
+inventory,stock_on_hand >= 0,Stock on hand cannot be negative.,60247,0,0.0,PASS
+inventory,units_sold >= 0,Units sold cannot be negative.,60247,0,0.0,PASS
+web_traffic,sessions >= unique_visitors,Sessions must be greater than or equal to unique visitors.,3652,0,0.0,PASS
+web_traffic,page_views >= sessions,Page views must be greater than or equal to sessions.,3652,0,0.0,PASS
+web_traffic,"bounce_rate in [0, 1] or [0, 100]","Bounce rate must be within [0, 1] or [0, 100], depending on data format.",3652,0,0.0,PASS
+payments,payment_value roughly matches order item total,Payment total per order should roughly match net order item total.,646945,0,0.0,PASS
+shipments,ship_date >= order_date,Ship date must be greater than or equal to order date.,566067,0,0.0,PASS
+returns,return_date >= order_date,Return date must be greater than or equal to order date.,39939,0,0.0,PASS
+reviews,review_date >= order_date,Review date must be greater than or equal to order date.,113551,0,0.0,PASS
