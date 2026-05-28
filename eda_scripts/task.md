@@ -7,6 +7,7 @@ Có những bảng nào?
 Mỗi bảng có bao nhiêu dòng/cột?
 Kiểu dữ liệu của từng cột là gì?
 Khóa chính, khóa ngoại, quan hệ giữa các bảng là gì?
+=> thực hiện tại script 1, 2, 3
 
 ## 2. Kiểm tra chất lượng dữ liệu
 
@@ -16,6 +17,7 @@ Outliers
 Sai kiểu dữ liệu
 Giá trị vô lý, ví dụ doanh thu âm, ngày giao hàng trước ngày đặt hàng
 Lỗi join, orphan foreign keys
+=> thực hiện tại script 4, 5
 
 ## 3. Khám phá phân phối dữ liệu
 
