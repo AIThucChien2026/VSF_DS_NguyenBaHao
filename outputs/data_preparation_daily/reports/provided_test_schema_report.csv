@@ -1,0 +1,7 @@
+check_name,status,note
+has_Date,pass,Date column is required
+has_Revenue,pass,Revenue target exists in provided test
+has_COGS,pass,COGS target exists in provided test
+unique_Date,pass,Provided test should have one row per date
+no_train_valid_overlap,pass,Test dates should not overlap historical train/valid dates
+target_dtype_numeric,pass,Provided test targets should be numeric if present

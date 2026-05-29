@@ -1,0 +1,6 @@
+output_table,rows,unique_dates,duplicate_dates
+traffic_daily_features,3652,3652,0
+orders_daily_features,3833,3833,0
+items_daily_features,3833,3833,0
+returns_daily_features,3806,3806,0
+inventory_daily_features,126,126,0

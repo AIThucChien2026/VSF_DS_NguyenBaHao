@@ -1,0 +1,15 @@
+table_name,rows_before,rows_after,columns_before,columns_after,missing_target_before,missing_target_after
+orders,646945,646945,8,8,,
+order_items,714669,714669,7,7,,
+customers,121930,121930,7,7,,
+products,2412,2412,8,8,,
+payments,646945,646945,4,4,,
+shipments,566067,566067,4,4,,
+returns,39939,39939,7,7,,
+reviews,113551,113551,7,7,,
+promotions,50,50,10,10,,
+inventory,60247,60247,17,17,,
+web_traffic,3652,3652,7,7,,
+sales,3833,3833,3,3,0.0,0.0
+geography,39948,39948,4,4,,
+sample_submission,548,548,3,3,,

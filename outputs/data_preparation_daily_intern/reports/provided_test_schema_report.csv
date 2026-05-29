@@ -1,0 +1,7 @@
+check_name,status
+has_Date,pass
+has_Revenue,pass
+has_COGS,pass
+unique_Date,pass
+no_train_valid_overlap,pass
+target_numeric,pass

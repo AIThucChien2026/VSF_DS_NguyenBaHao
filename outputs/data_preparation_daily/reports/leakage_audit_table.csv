@@ -1,0 +1,166 @@
+feature_name,source_table,source_date_column,prediction_date_column,leakage_risk,default_action,reason
+Revenue,sales,Date,Date,target,exclude_from_X,Target column
+COGS,sales,Date,Date,target,exclude_from_X,Target column
+day_of_week,calendar,Date,Date,low,include,Known before prediction
+month,calendar,Date,Date,low,include,Known before prediction
+quarter,calendar,Date,Date,low,include,Known before prediction
+year,calendar,Date,Date,low,include,Known before prediction
+is_weekend,calendar,Date,Date,low,include,Known before prediction
+Revenue_lag_1d,sales,Date,Date,low,include,Created with shift/rolling over past target values
+Revenue_lag_7d,sales,Date,Date,low,include,Created with shift/rolling over past target values
+Revenue_rolling_7d_mean,sales,Date,Date,low,include,Created with shift/rolling over past target values
+Revenue_rolling_28d_mean,sales,Date,Date,low,include,Created with shift/rolling over past target values
+COGS_lag_1d,sales,Date,Date,low,include,Created with shift/rolling over past target values
+COGS_lag_7d,sales,Date,Date,low,include,Created with shift/rolling over past target values
+COGS_rolling_7d_mean,sales,Date,Date,low,include,Created with shift/rolling over past target values
+COGS_rolling_28d_mean,sales,Date,Date,low,include,Created with shift/rolling over past target values
+sessions_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+unique_visitors_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+page_views_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+avg_bounce_rate,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+avg_session_duration_sec_mean,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+traffic_source_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_order_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_customer_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_source_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_status_cancelled_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_status_created_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_status_delivered_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_status_paid_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_status_returned_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+order_status_shipped_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_total_quantity,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_gross_item_revenue,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_discount_amount,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_distinct_products,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_estimated_cogs,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_return_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_refund_amount,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_return_quantity,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_stock_on_hand_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_units_received_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_units_sold_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_stockout_days_sum,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_days_of_supply_mean,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_fill_rate_mean,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+daily_inventory_product_count,daily_source_aggregate,Date,Date,medium_or_high,exclude_by_default,Same-day realized value may not be known at prediction time
+sessions_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+sessions_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+sessions_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+sessions_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+unique_visitors_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+unique_visitors_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+unique_visitors_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+unique_visitors_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+page_views_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+page_views_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+page_views_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+page_views_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_bounce_rate_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_bounce_rate_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_bounce_rate_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_bounce_rate_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_session_duration_sec_mean_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_session_duration_sec_mean_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_session_duration_sec_mean_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+avg_session_duration_sec_mean_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+traffic_source_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+traffic_source_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+traffic_source_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+traffic_source_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_order_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_order_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_order_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_order_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_customer_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_customer_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_customer_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_customer_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_source_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_source_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_source_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_source_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_cancelled_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_cancelled_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_cancelled_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_cancelled_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_created_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_created_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_created_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_created_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_delivered_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_delivered_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_delivered_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_delivered_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_paid_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_paid_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_paid_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_paid_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_returned_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_returned_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_returned_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_returned_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_shipped_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_shipped_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_shipped_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+order_status_shipped_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_total_quantity_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_total_quantity_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_total_quantity_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_total_quantity_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_gross_item_revenue_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_gross_item_revenue_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_gross_item_revenue_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_gross_item_revenue_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_discount_amount_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_discount_amount_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_discount_amount_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_discount_amount_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_distinct_products_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_distinct_products_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_distinct_products_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_distinct_products_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_estimated_cogs_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_estimated_cogs_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_estimated_cogs_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_estimated_cogs_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_refund_amount_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_refund_amount_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_refund_amount_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_refund_amount_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_quantity_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_quantity_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_quantity_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_return_quantity_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stock_on_hand_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stock_on_hand_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stock_on_hand_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stock_on_hand_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_received_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_received_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_received_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_received_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_sold_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_sold_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_sold_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_units_sold_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stockout_days_sum_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stockout_days_sum_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stockout_days_sum_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_stockout_days_sum_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_days_of_supply_mean_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_days_of_supply_mean_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_days_of_supply_mean_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_days_of_supply_mean_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_fill_rate_mean_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_fill_rate_mean_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_fill_rate_mean_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_fill_rate_mean_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_inventory_product_count_lag_1d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_inventory_product_count_lag_7d,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_inventory_product_count_rolling_7d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use
+daily_inventory_product_count_rolling_28d_mean,daily_source_aggregate,Date,Date,low,include,Created with shift/rolling before model use

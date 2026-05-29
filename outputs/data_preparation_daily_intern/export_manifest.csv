@@ -1,0 +1,50 @@
+file_name,file_type,rows,columns,purpose,path
+daily_model_base.csv,csv,3833,166,modeling artifact,outputs\data_preparation_daily_intern\daily_model_base.csv
+feature_table_daily.csv,csv,3833,136,modeling artifact,outputs\data_preparation_daily_intern\feature_table_daily.csv
+feature_table_model_input.csv,csv,3833,136,modeling artifact,outputs\data_preparation_daily_intern\feature_table_model_input.csv
+X_train.csv,csv,2663,133,modeling artifact,outputs\data_preparation_daily_intern\X_train.csv
+X_valid.csv,csv,1142,133,modeling artifact,outputs\data_preparation_daily_intern\X_valid.csv
+y_train_revenue.csv,csv,2663,2,modeling artifact,outputs\data_preparation_daily_intern\y_train_revenue.csv
+y_valid_revenue.csv,csv,1142,2,modeling artifact,outputs\data_preparation_daily_intern\y_valid_revenue.csv
+y_train_cogs.csv,csv,2663,2,modeling artifact,outputs\data_preparation_daily_intern\y_train_cogs.csv
+y_valid_cogs.csv,csv,1142,2,modeling artifact,outputs\data_preparation_daily_intern\y_valid_cogs.csv
+provided_test_table.csv,csv,548,3,modeling artifact,outputs\data_preparation_daily_intern\provided_test_table.csv
+final_feature_schema.csv,csv,166,4,modeling artifact,outputs\data_preparation_daily_intern\final_feature_schema.csv
+clean_tables/sales.csv,csv,3833,3,clean source table,outputs\data_preparation_daily_intern\clean_tables\sales.csv
+clean_tables/sample_submission.csv,csv,548,3,clean source table,outputs\data_preparation_daily_intern\clean_tables\sample_submission.csv
+clean_tables/web_traffic.csv,csv,3652,7,clean source table,outputs\data_preparation_daily_intern\clean_tables\web_traffic.csv
+clean_tables/orders.csv,csv,646945,8,clean source table,outputs\data_preparation_daily_intern\clean_tables\orders.csv
+clean_tables/order_items.csv,csv,714669,7,clean source table,outputs\data_preparation_daily_intern\clean_tables\order_items.csv
+clean_tables/products.csv,csv,2412,8,clean source table,outputs\data_preparation_daily_intern\clean_tables\products.csv
+clean_tables/returns.csv,csv,39939,7,clean source table,outputs\data_preparation_daily_intern\clean_tables\returns.csv
+clean_tables/inventory.csv,csv,60247,17,clean source table,outputs\data_preparation_daily_intern\clean_tables\inventory.csv
+reports/business_outlier_rulebook.csv,csv,9,4,audit report,outputs\data_preparation_daily_intern\reports\business_outlier_rulebook.csv
+reports/load_status_report.csv,csv,14,5,audit report,outputs\data_preparation_daily_intern\reports\load_status_report.csv
+reports/date_parse_report.csv,csv,9,6,audit report,outputs\data_preparation_daily_intern\reports\date_parse_report.csv
+reports/numeric_conversion_report.csv,csv,22,4,audit report,outputs\data_preparation_daily_intern\reports\numeric_conversion_report.csv
+reports/minimal_validation_report.csv,csv,10,6,audit report,outputs\data_preparation_daily_intern\reports\minimal_validation_report.csv
+reports/cleaning_decision_log.csv,csv,0,0,audit report,outputs\data_preparation_daily_intern\reports\cleaning_decision_log.csv
+reports/invalid_value_report.csv,csv,0,5,audit report,outputs\data_preparation_daily_intern\reports\invalid_value_report.csv
+reports/outlier_report.csv,csv,8,7,audit report,outputs\data_preparation_daily_intern\reports\outlier_report.csv
+reports/item_price_outlier_context_report.csv,csv,50,14,audit report,outputs\data_preparation_daily_intern\reports\item_price_outlier_context_report.csv
+reports/discount_outlier_context_report.csv,csv,50,12,audit report,outputs\data_preparation_daily_intern\reports\discount_outlier_context_report.csv
+reports/refund_outlier_context_report.csv,csv,50,13,audit report,outputs\data_preparation_daily_intern\reports\refund_outlier_context_report.csv
+reports/daily_target_outlier_context_report.csv,csv,334,12,audit report,outputs\data_preparation_daily_intern\reports\daily_target_outlier_context_report.csv
+reports/business_outlier_validity_summary.csv,csv,9,3,audit report,outputs\data_preparation_daily_intern\reports\business_outlier_validity_summary.csv
+reports/outlier_treatment_config.csv,csv,5,3,audit report,outputs\data_preparation_daily_intern\reports\outlier_treatment_config.csv
+reports/outlier_treatment_recommendation.csv,csv,14,13,audit report,outputs\data_preparation_daily_intern\reports\outlier_treatment_recommendation.csv
+reports/target_outlier_examples.csv,csv,20,5,audit report,outputs\data_preparation_daily_intern\reports\target_outlier_examples.csv
+reports/outlier_treatment_impact_report.csv,csv,14,14,audit report,outputs\data_preparation_daily_intern\reports\outlier_treatment_impact_report.csv
+reports/aggregation_quality_report.csv,csv,5,4,audit report,outputs\data_preparation_daily_intern\reports\aggregation_quality_report.csv
+reports/join_quality_report.csv,csv,5,5,audit report,outputs\data_preparation_daily_intern\reports\join_quality_report.csv
+reports/leakage_audit_table.csv,csv,165,5,audit report,outputs\data_preparation_daily_intern\reports\leakage_audit_table.csv
+reports/final_imputation_report.csv,csv,133,5,audit report,outputs\data_preparation_daily_intern\reports\final_imputation_report.csv
+reports/final_feature_schema.csv,csv,166,4,audit report,outputs\data_preparation_daily_intern\reports\final_feature_schema.csv
+reports/target_definition_table.csv,csv,2,5,audit report,outputs\data_preparation_daily_intern\reports\target_definition_table.csv
+reports/split_summary.csv,csv,2,6,audit report,outputs\data_preparation_daily_intern\reports\split_summary.csv
+reports/provided_test_summary.csv,csv,1,6,audit report,outputs\data_preparation_daily_intern\reports\provided_test_summary.csv
+reports/provided_test_schema_report.csv,csv,6,2,audit report,outputs\data_preparation_daily_intern\reports\provided_test_schema_report.csv
+reports/target_distribution_compare.csv,csv,3,8,audit report,outputs\data_preparation_daily_intern\reports\target_distribution_compare.csv
+reports/clean_feature_coverage.csv,csv,20,4,audit report,outputs\data_preparation_daily_intern\reports\clean_feature_coverage.csv
+reports/feature_target_correlation_report.csv,csv,266,6,audit report,outputs\data_preparation_daily_intern\reports\feature_target_correlation_report.csv
+reports/high_feature_correlation_report.csv,csv,21,3,audit report,outputs\data_preparation_daily_intern\reports\high_feature_correlation_report.csv
