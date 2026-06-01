@@ -1,0 +1,352 @@
+feature,timing_group,decision,reason
+day_of_week,known_now,keep,Known before prediction date
+month,known_now,keep,Known before prediction date
+quarter,known_now,keep,Known before prediction date
+year,known_now,keep,Known before prediction date
+is_weekend,known_now,keep,Known before prediction date
+is_holiday,known_now,keep,Known before prediction date
+days_to_year_end,known_now,keep,Known before prediction date
+promo_count_active,known_now,keep,Known before prediction date
+promo_discount_mean,known_now,keep,Known before prediction date
+promo_discount_max,known_now,keep,Known before prediction date
+is_promo_active,known_now,keep,Known before prediction date
+Revenue_lag_1d,target_lag,keep,Past target value
+Revenue_lag_7d,target_lag,keep,Past target value
+Revenue_lag_14d,target_lag,keep,Past target value
+Revenue_lag_28d,target_lag,keep,Past target value
+Revenue_lag_365d,target_lag,keep,Past target value
+Revenue_rolling_7d_mean,target_lag,keep,Past target value
+Revenue_rolling_28d_mean,target_lag,keep,Past target value
+Revenue_rolling_90d_mean,target_lag,keep,Past target value
+COGS_lag_1d,target_lag,keep,Past target value
+COGS_lag_7d,target_lag,keep,Past target value
+COGS_lag_14d,target_lag,keep,Past target value
+COGS_lag_28d,target_lag,keep,Past target value
+COGS_lag_365d,target_lag,keep,Past target value
+COGS_rolling_7d_mean,target_lag,keep,Past target value
+COGS_rolling_28d_mean,target_lag,keep,Past target value
+COGS_rolling_90d_mean,target_lag,keep,Past target value
+sessions_sum_lag_1d,source_lag,keep,Past source signal
+sessions_sum_lag_7d,source_lag,keep,Past source signal
+sessions_sum_lag_14d,source_lag,keep,Past source signal
+sessions_sum_lag_28d,source_lag,keep,Past source signal
+sessions_sum_lag_365d,source_lag,keep,Past source signal
+sessions_sum_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_sum_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_sum_rolling_90d_mean,source_lag,keep,Past source signal
+visitors_sum_lag_1d,source_lag,keep,Past source signal
+visitors_sum_lag_7d,source_lag,keep,Past source signal
+visitors_sum_lag_14d,source_lag,keep,Past source signal
+visitors_sum_lag_28d,source_lag,keep,Past source signal
+visitors_sum_lag_365d,source_lag,keep,Past source signal
+visitors_sum_rolling_7d_mean,source_lag,keep,Past source signal
+visitors_sum_rolling_28d_mean,source_lag,keep,Past source signal
+visitors_sum_rolling_90d_mean,source_lag,keep,Past source signal
+page_views_sum_lag_1d,source_lag,keep,Past source signal
+page_views_sum_lag_7d,source_lag,keep,Past source signal
+page_views_sum_lag_14d,source_lag,keep,Past source signal
+page_views_sum_lag_28d,source_lag,keep,Past source signal
+page_views_sum_lag_365d,source_lag,keep,Past source signal
+page_views_sum_rolling_7d_mean,source_lag,keep,Past source signal
+page_views_sum_rolling_28d_mean,source_lag,keep,Past source signal
+page_views_sum_rolling_90d_mean,source_lag,keep,Past source signal
+bounce_rate_mean_lag_1d,source_lag,keep,Past source signal
+bounce_rate_mean_lag_7d,source_lag,keep,Past source signal
+bounce_rate_mean_lag_14d,source_lag,keep,Past source signal
+bounce_rate_mean_lag_28d,source_lag,keep,Past source signal
+bounce_rate_mean_lag_365d,source_lag,keep,Past source signal
+bounce_rate_mean_rolling_7d_mean,source_lag,keep,Past source signal
+bounce_rate_mean_rolling_28d_mean,source_lag,keep,Past source signal
+bounce_rate_mean_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_source_direct_lag_1d,source_lag,keep,Past source signal
+sessions_source_direct_lag_7d,source_lag,keep,Past source signal
+sessions_source_direct_lag_14d,source_lag,keep,Past source signal
+sessions_source_direct_lag_28d,source_lag,keep,Past source signal
+sessions_source_direct_lag_365d,source_lag,keep,Past source signal
+sessions_source_direct_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_source_direct_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_source_direct_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_source_email_campaign_lag_1d,source_lag,keep,Past source signal
+sessions_source_email_campaign_lag_7d,source_lag,keep,Past source signal
+sessions_source_email_campaign_lag_14d,source_lag,keep,Past source signal
+sessions_source_email_campaign_lag_28d,source_lag,keep,Past source signal
+sessions_source_email_campaign_lag_365d,source_lag,keep,Past source signal
+sessions_source_email_campaign_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_source_email_campaign_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_source_email_campaign_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_source_organic_search_lag_1d,source_lag,keep,Past source signal
+sessions_source_organic_search_lag_7d,source_lag,keep,Past source signal
+sessions_source_organic_search_lag_14d,source_lag,keep,Past source signal
+sessions_source_organic_search_lag_28d,source_lag,keep,Past source signal
+sessions_source_organic_search_lag_365d,source_lag,keep,Past source signal
+sessions_source_organic_search_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_source_organic_search_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_source_organic_search_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_source_paid_search_lag_1d,source_lag,keep,Past source signal
+sessions_source_paid_search_lag_7d,source_lag,keep,Past source signal
+sessions_source_paid_search_lag_14d,source_lag,keep,Past source signal
+sessions_source_paid_search_lag_28d,source_lag,keep,Past source signal
+sessions_source_paid_search_lag_365d,source_lag,keep,Past source signal
+sessions_source_paid_search_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_source_paid_search_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_source_paid_search_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_source_referral_lag_1d,source_lag,keep,Past source signal
+sessions_source_referral_lag_7d,source_lag,keep,Past source signal
+sessions_source_referral_lag_14d,source_lag,keep,Past source signal
+sessions_source_referral_lag_28d,source_lag,keep,Past source signal
+sessions_source_referral_lag_365d,source_lag,keep,Past source signal
+sessions_source_referral_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_source_referral_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_source_referral_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_source_social_media_lag_1d,source_lag,keep,Past source signal
+sessions_source_social_media_lag_7d,source_lag,keep,Past source signal
+sessions_source_social_media_lag_14d,source_lag,keep,Past source signal
+sessions_source_social_media_lag_28d,source_lag,keep,Past source signal
+sessions_source_social_media_lag_365d,source_lag,keep,Past source signal
+sessions_source_social_media_rolling_7d_mean,source_lag,keep,Past source signal
+sessions_source_social_media_rolling_28d_mean,source_lag,keep,Past source signal
+sessions_source_social_media_rolling_90d_mean,source_lag,keep,Past source signal
+order_count_lag_1d,source_lag,keep,Past source signal
+order_count_lag_7d,source_lag,keep,Past source signal
+order_count_lag_14d,source_lag,keep,Past source signal
+order_count_lag_28d,source_lag,keep,Past source signal
+order_count_lag_365d,source_lag,keep,Past source signal
+order_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_count_rolling_90d_mean,source_lag,keep,Past source signal
+customer_count_lag_1d,source_lag,keep,Past source signal
+customer_count_lag_7d,source_lag,keep,Past source signal
+customer_count_lag_14d,source_lag,keep,Past source signal
+customer_count_lag_28d,source_lag,keep,Past source signal
+customer_count_lag_365d,source_lag,keep,Past source signal
+customer_count_rolling_7d_mean,source_lag,keep,Past source signal
+customer_count_rolling_28d_mean,source_lag,keep,Past source signal
+customer_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_source_count_lag_1d,source_lag,keep,Past source signal
+order_source_count_lag_7d,source_lag,keep,Past source signal
+order_source_count_lag_14d,source_lag,keep,Past source signal
+order_source_count_lag_28d,source_lag,keep,Past source signal
+order_source_count_lag_365d,source_lag,keep,Past source signal
+order_source_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_source_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_source_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_status_cancelled_count_lag_1d,source_lag,keep,Past source signal
+order_status_cancelled_count_lag_7d,source_lag,keep,Past source signal
+order_status_cancelled_count_lag_14d,source_lag,keep,Past source signal
+order_status_cancelled_count_lag_28d,source_lag,keep,Past source signal
+order_status_cancelled_count_lag_365d,source_lag,keep,Past source signal
+order_status_cancelled_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_status_cancelled_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_status_cancelled_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_status_created_count_lag_1d,source_lag,keep,Past source signal
+order_status_created_count_lag_7d,source_lag,keep,Past source signal
+order_status_created_count_lag_14d,source_lag,keep,Past source signal
+order_status_created_count_lag_28d,source_lag,keep,Past source signal
+order_status_created_count_lag_365d,source_lag,keep,Past source signal
+order_status_created_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_status_created_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_status_created_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_status_delivered_count_lag_1d,source_lag,keep,Past source signal
+order_status_delivered_count_lag_7d,source_lag,keep,Past source signal
+order_status_delivered_count_lag_14d,source_lag,keep,Past source signal
+order_status_delivered_count_lag_28d,source_lag,keep,Past source signal
+order_status_delivered_count_lag_365d,source_lag,keep,Past source signal
+order_status_delivered_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_status_delivered_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_status_delivered_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_status_paid_count_lag_1d,source_lag,keep,Past source signal
+order_status_paid_count_lag_7d,source_lag,keep,Past source signal
+order_status_paid_count_lag_14d,source_lag,keep,Past source signal
+order_status_paid_count_lag_28d,source_lag,keep,Past source signal
+order_status_paid_count_lag_365d,source_lag,keep,Past source signal
+order_status_paid_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_status_paid_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_status_paid_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_status_returned_count_lag_1d,source_lag,keep,Past source signal
+order_status_returned_count_lag_7d,source_lag,keep,Past source signal
+order_status_returned_count_lag_14d,source_lag,keep,Past source signal
+order_status_returned_count_lag_28d,source_lag,keep,Past source signal
+order_status_returned_count_lag_365d,source_lag,keep,Past source signal
+order_status_returned_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_status_returned_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_status_returned_count_rolling_90d_mean,source_lag,keep,Past source signal
+order_status_shipped_count_lag_1d,source_lag,keep,Past source signal
+order_status_shipped_count_lag_7d,source_lag,keep,Past source signal
+order_status_shipped_count_lag_14d,source_lag,keep,Past source signal
+order_status_shipped_count_lag_28d,source_lag,keep,Past source signal
+order_status_shipped_count_lag_365d,source_lag,keep,Past source signal
+order_status_shipped_count_rolling_7d_mean,source_lag,keep,Past source signal
+order_status_shipped_count_rolling_28d_mean,source_lag,keep,Past source signal
+order_status_shipped_count_rolling_90d_mean,source_lag,keep,Past source signal
+item_quantity_sum_lag_1d,source_lag,keep,Past source signal
+item_quantity_sum_lag_7d,source_lag,keep,Past source signal
+item_quantity_sum_lag_14d,source_lag,keep,Past source signal
+item_quantity_sum_lag_28d,source_lag,keep,Past source signal
+item_quantity_sum_lag_365d,source_lag,keep,Past source signal
+item_quantity_sum_rolling_7d_mean,source_lag,keep,Past source signal
+item_quantity_sum_rolling_28d_mean,source_lag,keep,Past source signal
+item_quantity_sum_rolling_90d_mean,source_lag,keep,Past source signal
+gross_item_revenue_sum_lag_1d,source_lag,keep,Past source signal
+gross_item_revenue_sum_lag_7d,source_lag,keep,Past source signal
+gross_item_revenue_sum_lag_14d,source_lag,keep,Past source signal
+gross_item_revenue_sum_lag_28d,source_lag,keep,Past source signal
+gross_item_revenue_sum_lag_365d,source_lag,keep,Past source signal
+gross_item_revenue_sum_rolling_7d_mean,source_lag,keep,Past source signal
+gross_item_revenue_sum_rolling_28d_mean,source_lag,keep,Past source signal
+gross_item_revenue_sum_rolling_90d_mean,source_lag,keep,Past source signal
+discount_amount_sum_lag_1d,source_lag,keep,Past source signal
+discount_amount_sum_lag_7d,source_lag,keep,Past source signal
+discount_amount_sum_lag_14d,source_lag,keep,Past source signal
+discount_amount_sum_lag_28d,source_lag,keep,Past source signal
+discount_amount_sum_lag_365d,source_lag,keep,Past source signal
+discount_amount_sum_rolling_7d_mean,source_lag,keep,Past source signal
+discount_amount_sum_rolling_28d_mean,source_lag,keep,Past source signal
+discount_amount_sum_rolling_90d_mean,source_lag,keep,Past source signal
+estimated_cogs_sum_lag_1d,source_lag,keep,Past source signal
+estimated_cogs_sum_lag_7d,source_lag,keep,Past source signal
+estimated_cogs_sum_lag_14d,source_lag,keep,Past source signal
+estimated_cogs_sum_lag_28d,source_lag,keep,Past source signal
+estimated_cogs_sum_lag_365d,source_lag,keep,Past source signal
+estimated_cogs_sum_rolling_7d_mean,source_lag,keep,Past source signal
+estimated_cogs_sum_rolling_28d_mean,source_lag,keep,Past source signal
+estimated_cogs_sum_rolling_90d_mean,source_lag,keep,Past source signal
+distinct_product_count_lag_1d,source_lag,keep,Past source signal
+distinct_product_count_lag_7d,source_lag,keep,Past source signal
+distinct_product_count_lag_14d,source_lag,keep,Past source signal
+distinct_product_count_lag_28d,source_lag,keep,Past source signal
+distinct_product_count_lag_365d,source_lag,keep,Past source signal
+distinct_product_count_rolling_7d_mean,source_lag,keep,Past source signal
+distinct_product_count_rolling_28d_mean,source_lag,keep,Past source signal
+distinct_product_count_rolling_90d_mean,source_lag,keep,Past source signal
+return_count_lag_1d,source_lag,keep,Past source signal
+return_count_lag_7d,source_lag,keep,Past source signal
+return_count_lag_14d,source_lag,keep,Past source signal
+return_count_lag_28d,source_lag,keep,Past source signal
+return_count_lag_365d,source_lag,keep,Past source signal
+return_count_rolling_7d_mean,source_lag,keep,Past source signal
+return_count_rolling_28d_mean,source_lag,keep,Past source signal
+return_count_rolling_90d_mean,source_lag,keep,Past source signal
+return_quantity_sum_lag_1d,source_lag,keep,Past source signal
+return_quantity_sum_lag_7d,source_lag,keep,Past source signal
+return_quantity_sum_lag_14d,source_lag,keep,Past source signal
+return_quantity_sum_lag_28d,source_lag,keep,Past source signal
+return_quantity_sum_lag_365d,source_lag,keep,Past source signal
+return_quantity_sum_rolling_7d_mean,source_lag,keep,Past source signal
+return_quantity_sum_rolling_28d_mean,source_lag,keep,Past source signal
+return_quantity_sum_rolling_90d_mean,source_lag,keep,Past source signal
+refund_amount_sum_lag_1d,source_lag,keep,Past source signal
+refund_amount_sum_lag_7d,source_lag,keep,Past source signal
+refund_amount_sum_lag_14d,source_lag,keep,Past source signal
+refund_amount_sum_lag_28d,source_lag,keep,Past source signal
+refund_amount_sum_lag_365d,source_lag,keep,Past source signal
+refund_amount_sum_rolling_7d_mean,source_lag,keep,Past source signal
+refund_amount_sum_rolling_28d_mean,source_lag,keep,Past source signal
+refund_amount_sum_rolling_90d_mean,source_lag,keep,Past source signal
+stock_on_hand_sum_lag_1d,source_lag,keep,Past source signal
+stock_on_hand_sum_lag_7d,source_lag,keep,Past source signal
+stock_on_hand_sum_lag_14d,source_lag,keep,Past source signal
+stock_on_hand_sum_lag_28d,source_lag,keep,Past source signal
+stock_on_hand_sum_lag_365d,source_lag,keep,Past source signal
+stock_on_hand_sum_rolling_7d_mean,source_lag,keep,Past source signal
+stock_on_hand_sum_rolling_28d_mean,source_lag,keep,Past source signal
+stock_on_hand_sum_rolling_90d_mean,source_lag,keep,Past source signal
+units_sold_sum_lag_1d,source_lag,keep,Past source signal
+units_sold_sum_lag_7d,source_lag,keep,Past source signal
+units_sold_sum_lag_14d,source_lag,keep,Past source signal
+units_sold_sum_lag_28d,source_lag,keep,Past source signal
+units_sold_sum_lag_365d,source_lag,keep,Past source signal
+units_sold_sum_rolling_7d_mean,source_lag,keep,Past source signal
+units_sold_sum_rolling_28d_mean,source_lag,keep,Past source signal
+units_sold_sum_rolling_90d_mean,source_lag,keep,Past source signal
+stockout_days_sum_lag_1d,source_lag,keep,Past source signal
+stockout_days_sum_lag_7d,source_lag,keep,Past source signal
+stockout_days_sum_lag_14d,source_lag,keep,Past source signal
+stockout_days_sum_lag_28d,source_lag,keep,Past source signal
+stockout_days_sum_lag_365d,source_lag,keep,Past source signal
+stockout_days_sum_rolling_7d_mean,source_lag,keep,Past source signal
+stockout_days_sum_rolling_28d_mean,source_lag,keep,Past source signal
+stockout_days_sum_rolling_90d_mean,source_lag,keep,Past source signal
+fill_rate_mean_lag_1d,source_lag,keep,Past source signal
+fill_rate_mean_lag_7d,source_lag,keep,Past source signal
+fill_rate_mean_lag_14d,source_lag,keep,Past source signal
+fill_rate_mean_lag_28d,source_lag,keep,Past source signal
+fill_rate_mean_lag_365d,source_lag,keep,Past source signal
+fill_rate_mean_rolling_7d_mean,source_lag,keep,Past source signal
+fill_rate_mean_rolling_28d_mean,source_lag,keep,Past source signal
+fill_rate_mean_rolling_90d_mean,source_lag,keep,Past source signal
+inventory_product_count_lag_1d,source_lag,keep,Past source signal
+inventory_product_count_lag_7d,source_lag,keep,Past source signal
+inventory_product_count_lag_14d,source_lag,keep,Past source signal
+inventory_product_count_lag_28d,source_lag,keep,Past source signal
+inventory_product_count_lag_365d,source_lag,keep,Past source signal
+inventory_product_count_rolling_7d_mean,source_lag,keep,Past source signal
+inventory_product_count_rolling_28d_mean,source_lag,keep,Past source signal
+inventory_product_count_rolling_90d_mean,source_lag,keep,Past source signal
+review_count_lag_1d,source_lag,keep,Past source signal
+review_count_lag_7d,source_lag,keep,Past source signal
+review_count_lag_14d,source_lag,keep,Past source signal
+review_count_lag_28d,source_lag,keep,Past source signal
+review_count_lag_365d,source_lag,keep,Past source signal
+review_count_rolling_7d_mean,source_lag,keep,Past source signal
+review_count_rolling_28d_mean,source_lag,keep,Past source signal
+review_count_rolling_90d_mean,source_lag,keep,Past source signal
+rating_mean_lag_1d,source_lag,keep,Past source signal
+rating_mean_lag_7d,source_lag,keep,Past source signal
+rating_mean_lag_14d,source_lag,keep,Past source signal
+rating_mean_lag_28d,source_lag,keep,Past source signal
+rating_mean_lag_365d,source_lag,keep,Past source signal
+rating_mean_rolling_7d_mean,source_lag,keep,Past source signal
+rating_mean_rolling_28d_mean,source_lag,keep,Past source signal
+rating_mean_rolling_90d_mean,source_lag,keep,Past source signal
+low_rating_count_lag_1d,source_lag,keep,Past source signal
+low_rating_count_lag_7d,source_lag,keep,Past source signal
+low_rating_count_lag_14d,source_lag,keep,Past source signal
+low_rating_count_lag_28d,source_lag,keep,Past source signal
+low_rating_count_lag_365d,source_lag,keep,Past source signal
+low_rating_count_rolling_7d_mean,source_lag,keep,Past source signal
+low_rating_count_rolling_28d_mean,source_lag,keep,Past source signal
+low_rating_count_rolling_90d_mean,source_lag,keep,Past source signal
+new_customer_count_lag_1d,source_lag,keep,Past source signal
+new_customer_count_lag_7d,source_lag,keep,Past source signal
+new_customer_count_lag_14d,source_lag,keep,Past source signal
+new_customer_count_lag_28d,source_lag,keep,Past source signal
+new_customer_count_lag_365d,source_lag,keep,Past source signal
+new_customer_count_rolling_7d_mean,source_lag,keep,Past source signal
+new_customer_count_rolling_28d_mean,source_lag,keep,Past source signal
+new_customer_count_rolling_90d_mean,source_lag,keep,Past source signal
+sessions_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+visitors_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+page_views_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+bounce_rate_mean,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+sessions_source_direct,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+sessions_source_email_campaign,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+sessions_source_organic_search,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+sessions_source_paid_search,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+sessions_source_referral,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+sessions_source_social_media,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+customer_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_source_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_status_cancelled_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_status_created_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_status_delivered_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_status_paid_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_status_returned_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+order_status_shipped_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+item_quantity_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+gross_item_revenue_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+discount_amount_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+estimated_cogs_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+distinct_product_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+return_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+return_quantity_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+refund_amount_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+stock_on_hand_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+units_sold_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+stockout_days_sum,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+fill_rate_mean,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+inventory_product_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+review_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+rating_mean,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+low_rating_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead
+new_customer_count,same_day_raw,exclude,Realized same-day signal; use lag/rolling version instead

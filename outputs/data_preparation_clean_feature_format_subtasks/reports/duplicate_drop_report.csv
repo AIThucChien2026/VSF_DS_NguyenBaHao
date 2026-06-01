@@ -1,0 +1,12 @@
+table,rows_before,rows_after,dropped_rows
+sales,3833,3833,0
+sample_submission,548,548,0
+web_traffic,3652,3652,0
+orders,646945,646945,0
+order_items,714669,714669,0
+products,2412,2412,0
+returns,39939,39939,0
+reviews,113551,113551,0
+promotions,50,50,0
+inventory,60247,60247,0
+customers,121930,121930,0

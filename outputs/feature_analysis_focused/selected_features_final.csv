@@ -1,0 +1,12 @@
+feature,feature_family,timing_type,decision,decision_reason
+Revenue_lag_1d,target_lag,lagged,keep,Baseline time-safe feature
+COGS_lag_1d,target_lag,lagged,keep,Baseline time-safe feature
+order_count_lag_1d,order_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+order_district_count_lag_1d,geography_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+shipment_count_lag_1d,shipment_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+refund_amount_sum_rolling_7d_mean,return_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+review_count_rolling_7d_mean,review_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+return_count_rolling_7d_mean,return_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+shipping_fee_sum_lag_1d,shipment_lag,lagged,keep,Accepted by rolling-origin Ridge wrapper
+month,calendar,known_now,keep,Baseline time-safe feature
+day_of_week,calendar,known_now,keep,Baseline time-safe feature
