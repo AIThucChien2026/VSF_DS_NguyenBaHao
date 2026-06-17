@@ -1,0 +1,16 @@
+﻿source_table,family,type,feature_count,avg_missing_pct,avg_abs_corr_target
+Date,cos_month,calendar,1,0.0,0.5416192617782177
+Date,day_of_month,calendar,1,0.0,0.3036977129470155
+Date,is_month_end,calendar,1,0.0,0.1509294870779835
+Date,is_month_start,calendar,1,0.0,0.1091331976051136
+Date,quarter,calendar,1,0.0,0.2482338846130985
+Date,year,calendar,1,0.0,0.3409727446424481
+sales,Gross_Margin,lag,2,0.105,0.19962503782744323
+sales,Gross_Margin,rolling,2,0.03,0.2197871271698503
+sales,Gross_Profit,lag,2,0.105,0.5816689430622951
+sales,Gross_Profit,rolling,2,0.03,0.578348556321689
+sales,Revenue,lag,2,0.38,0.751337878498562
+sales,Revenue,rolling,2,0.03,0.716818827319657
+sales,Revenue,change,1,0.18,0.2574655916286914
+sales,Revenue,diff,1,0.05,0.1998476313621875
+web_traffic,page_views,lag,1,5.09,0.3393343776724024

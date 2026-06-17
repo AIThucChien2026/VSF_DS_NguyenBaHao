@@ -40,9 +40,27 @@ Output chính:
 - Wrapper time-aware dùng để kiểm tra đóng góp dự báo ngoài baseline.
 - Feature set hiện tại có thể tiếp tục được điều chỉnh sau khi đánh giá thêm scatter, redundancy và validation model.
 
-## 4. Cấu trúc notebook hiện tại
+## 4. Mapping notebook với pipeline tổng quát
 
-### Section 0 - Setup
+Phần này dùng để chỉ rõ mỗi section trong notebook đang thuộc bước nào của quy trình Data Science. Notebook hiện tại vẫn là **chuẩn bị dữ liệu và chọn feature trước modeling**, chưa phải notebook train model cuối cùng.
+
+| Mục lớn trong notebook | Thuộc bước lớn trong pipeline | Mục con chính |
+| :--- | :--- | :--- |
+| `1. Load data và tổng quan` | Data Description | Load file, kiểm tra shape/schema |
+| `2. Clean data` | Data Cleaning | Chuẩn hóa dữ liệu nguồn, duplicate, missing/invalid report |
+| `3. Feature Engineering` | Feature Engineering + Leakage Control | `3.1` target, `3.2` known-now/source aggregate, `3.3` lag/rolling, `3.4` candidate table |
+| `4. Data Filtering & Feature Selection` | Data Filtering + Feature Selection | `4.1` feature catalog, `4.2` relevance, `4.3` compact selection |
+| `5. Feature Analysis & Validation` | EDA + Feature Selection validation | `5.1` univariate, `5.2` bivariate, `5.3` redundancy, `5.4` stability/wrapper/export |
+
+Ghi chú quan trọng:
+
+- Wrapper time-aware có dùng Ridge Regression, nhưng mục tiêu là **lọc feature theo validation**, không phải train model cuối cùng.
+- Modeling chính thức sẽ nằm ở notebook riêng sau bước này, dùng feature set đã được chuẩn bị và audit.
+- Trước khi train model, cần có dữ liệu sạch, target đúng grain, feature leakage-safe và feature set cuối có lý do giữ/loại.
+
+## 5. Cấu trúc notebook hiện tại
+
+### Mục 0 - Setup
 
 Mục tiêu:
 
@@ -56,28 +74,81 @@ Ghi chú:
 - Các helper chung như đọc CSV, hiển thị bảng, chia loại feature, tạo lag/rolling và plot feature-target đã được đưa sang `ds_utils.py`.
 - Notebook chỉ giữ logic riêng của bài toán.
 
-### Section 1 - Load và kiểm tra dữ liệu đầu vào
+### Mục 1 - Load data và tổng quan
 
 Mục tiêu:
 
 - Load toàn bộ bảng nguồn.
-- Chuẩn hóa kiểu ngày và kiểu số.
-- Kiểm tra missing, duplicate và target overview.
+- Kiểm tra file nào load được, file nào thiếu.
+- Kiểm tra shape ban đầu của từng bảng.
+- Chưa tạo target và chưa làm feature engineering.
 
 Kết quả chính:
 
 - Load đủ 14 bảng dữ liệu.
-- Daily target base được tạo từ `sales`.
-- Missing cao chủ yếu nằm ở một số cột nguồn không nhất thiết dùng trực tiếp cho daily forecasting.
+- Có `load_summary` để audit input.
+- Đây là bước Data Description, chỉ kiểm tra sơ bộ trước khi clean.
 
-### Section 2 - Tạo daily feature table leakage-safe
+### Mục 2 - Clean data
 
 Mục tiêu:
 
-- Tạo daily base có `Revenue`, `COGS`, `gross_margin`, `margin_rate`.
+- Chuẩn hóa tên cột và chuỗi rỗng.
+- Chuẩn hóa kiểu ngày và kiểu số theo schema.
+- Drop duplicate hoàn toàn.
+- Xử lý missing có ý nghĩa nghiệp vụ rõ ràng, ví dụ `discount_amount` missing được hiểu là không giảm giá.
+- Drop dòng `sales` thiếu `Date`, `Revenue` hoặc `COGS` trước khi tạo target.
+- Flag giá trị âm/nghi vấn để review, không tự động cap/drop outlier.
+
+Kết quả chính:
+
+- Có `standardize_summary`, `type_summary`, `dup_summary`, `cleaning_action_report`, `target_cleaning_report`, `invalid_value_report`, `missing_summary`.
+- Dữ liệu sạch nằm trong biến `clean`.
+- Đây là bước Data Cleaning, diễn ra sau load và trước khi tạo target.
+
+### Mục 3 - Feature Engineering
+
+Mục tiêu:
+
+- Tạo dữ liệu theo grain ngày.
+- Tạo target và các feature có thể biết tại thời điểm dự báo.
+- Aggregate các nguồn vận hành về ngày.
+- Tạo lag/rolling bằng dữ liệu quá khứ đã shift.
+
+#### Mục 3.1 - Tạo bảng target theo ngày
+
+Mục tiêu:
+
+- Tạo daily target base từ bảng `sales` đã làm sạch.
+- Aggregate `Revenue` và `COGS` theo `Date`.
+- Tạo thêm `gross_margin` và `margin_rate` để phân tích target.
+- Vẽ phân phối và trend target để kiểm tra nhanh trước khi tạo feature.
+
+Kết quả chính:
+
+- Có `daily_base` ở grain ngày.
+- Target không bị fill missing tùy tiện.
+- Đây là bước Target Construction, phục vụ supervised learning sau này.
+
+#### Mục 3.2 - Ghép feature biết trước và nguồn vận hành
+
+Mục tiêu:
+
 - Tạo feature known-now như calendar và planned promotion.
 - Aggregate nguồn vận hành theo ngày.
+- Ghép các bảng `orders`, `order_items`, `payments`, `shipments`, `web_traffic`, `returns`, `inventory`, `reviews`, `customers`, `geography` về grain ngày.
+
+#### Mục 3.3 - Tạo lag/rolling leakage-safe
+
+Mục tiêu:
+
 - Tạo lag/rolling cho target và source bằng dữ liệu quá khứ.
+- Loại same-day source feature khỏi candidate trực tiếp để tránh leakage.
+
+#### Mục 3.4 - Tạo candidate feature table
+
+Mục tiêu:
+
 - Tạo bảng candidate feature.
 
 Kết quả chính:
@@ -87,7 +158,9 @@ Kết quả chính:
 - Ba bảng bổ sung `payments`, `shipments`, `geography` được aggregate theo ngày rồi tạo lag/rolling trước khi đưa vào candidate.
 - Same-day source feature được loại khỏi candidate trực tiếp để tránh leakage.
 
-### Section 3 - Lọc feature gọn trước khi phân tích sâu
+### Mục 4 - Data Filtering & Feature Selection
+
+#### Mục 4.1 - Lọc feature gọn trước khi phân tích sâu
 
 Mục tiêu:
 
@@ -103,7 +176,9 @@ Kết quả chính:
 - Các feature được chọn dựa trên chất lượng dữ liệu, Spearman với target, family cap và signal group.
 - Các biến trùng trực tiếp với target hoặc nhiều biến cùng một signal bị loại bớt.
 
-### Section 4 - Phân tích đơn biến
+### Mục 5 - Feature Analysis & Validation
+
+#### Mục 5.1 - Phân tích đơn biến
 
 Mục tiêu:
 
@@ -117,7 +192,7 @@ Kết luận hiện tại:
 - Một số feature nguồn có missing nhẹ do coverage theo ngày không đầy đủ.
 - Không drop chỉ vì missing ở bước này; tiếp tục dùng wrapper/time-aware để kiểm tra đóng góp.
 
-### Section 5 - Phân tích song biến với target
+#### Mục 5.2 - Phân tích song biến với target
 
 Mục tiêu:
 
@@ -133,7 +208,7 @@ Ghi chú:
 - Trị tuyệt đối dùng để xếp hạng độ mạnh, còn dấu của Spearman dùng để biết chiều quan hệ.
 - Scatter vẫn cần xem thủ công vì correlation cao chưa chắc feature có signal sạch.
 
-### Section 6 - Phân tích đa biến và redundancy
+#### Mục 5.3 - Phân tích đa biến và redundancy
 
 Mục tiêu:
 
@@ -154,7 +229,7 @@ Kết luận hiện tại:
 - `order_lag`, `payment_lag`, `geography_lag`, `shipment_lag`, `return_lag`, `review_lag` có tín hiệu rõ ở EDA.
 - Nhóm shipment và geography có đóng góp thêm trong wrapper khi compact selection giữ nhiều đại diện hơn. Nhóm payment, traffic, inventory, discount có tương quan nhưng chưa tạo đủ incremental WAPE sau target lag và các nhóm đã chọn.
 
-### Section 7 - Stability, wrapper time-aware và export
+#### Mục 5.4 - Stability, wrapper time-aware và export
 
 Mục tiêu:
 
@@ -174,7 +249,7 @@ Lý do chọn ngưỡng wrapper hiện tại:
 - Ngưỡng 0.0002 vẫn yêu cầu incremental gain dương, đồng thời giữ thêm các nhóm có cải thiện rõ như `demand_volume` và `return_refund`.
 - Các nhóm mới `shipment` và `geography` được wrapper giữ sau khi compact selection có thêm đại diện. Nhóm `payment` vẫn chưa được giữ vì không cải thiện đủ sau các nhóm mạnh hơn.
 
-## 5. Kết quả feature hiện tại
+## 6. Kết quả feature hiện tại
 
 Feature set hiện tại gồm 11 biến:
 
@@ -215,7 +290,7 @@ Lý do chưa giữ:
 - `payment_value_sum_lag_1d` và `payment_method_credit_card_count_lag_1d` có Spearman cao nhưng chưa tạo thêm incremental gain đủ tốt trong wrapper.
 - Các nhóm này cần được đánh giá thêm nếu mở rộng feature set cho modeling.
 
-## 6. Kết quả wrapper hiện tại
+## 7. Kết quả wrapper hiện tại
 
 Baseline WAPE:
 
@@ -233,7 +308,7 @@ Diễn giải:
 - Kết quả này chưa phải model cuối cùng.
 - Đây là bằng chứng để dùng feature set hiện tại làm đầu vào cho bước modeling tiếp theo.
 
-## 7. Những điểm cần review tiếp
+## 8. Những điểm cần review tiếp
 
 Các feature nên xem kỹ bằng scatter/redundancy trước khi quyết định mở rộng:
 
@@ -252,7 +327,7 @@ Lý do:
 - Một số biến có thể chỉ ăn theo trend hoặc quy mô target lag.
 - Một số biến có incremental WAPE gain âm sau khi đã thêm nhóm mạnh hơn.
 
-## 8. Definition of Done hiện tại
+## 9. Definition of Done hiện tại
 
 Notebook được coi là đạt yêu cầu hiện tại nếu:
 
@@ -266,7 +341,7 @@ Notebook được coi là đạt yêu cầu hiện tại nếu:
 - Wrapper time-aware xuất được feature set hiện tại gồm 11 biến.
 - Output CSV được cập nhật theo kết quả hiện tại.
 
-## 9. Việc không làm trong notebook này
+## 10. Việc không làm trong notebook này
 
 - Không train model cuối cùng.
 - Không tune hyperparameter.
@@ -275,7 +350,7 @@ Notebook được coi là đạt yêu cầu hiện tại nếu:
 - Không tạo split modeling chính thức.
 - Không dùng wrapper như bằng chứng duy nhất để kết luận business impact.
 
-## 10. Bước tiếp theo đề xuất
+## 11. Bước tiếp theo đề xuất
 
 - Review scatter của các feature bị loại nhưng còn nghi ngờ.
 - Đánh giá feature set 11 biến và phương án mở rộng lên khoảng 12-16 biến cho model tree/boosting nếu cần.

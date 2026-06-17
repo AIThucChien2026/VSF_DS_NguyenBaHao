@@ -20,6 +20,58 @@ Không bước nào là hoàn hảo ngay từ lần đầu. Mục tiêu của Cy
 
 ---
 
+## Bản đồ quy trình tổng quát và bước cụ thể
+
+Phần này dùng để tránh nhầm giữa **pipeline tổng quát** và **các thao tác cụ thể trong notebook**. Một notebook có thể có nhiều section nhỏ, nhưng mỗi section phải thuộc một bước lớn trong quy trình DS. Khi trình bày, luôn nói rõ: "đoạn này đang làm bước nào trong pipeline?" để người xem biết hướng đi và biết ta chưa lạc sang modeling quá sớm.
+
+### Mapping pipeline tổng quát
+
+| Bước lớn trong pipeline | Mục đích | Ví dụ thao tác cụ thể | Có phải train model chưa? |
+| :--- | :--- | :--- | :--- |
+| Business Understanding | Hiểu bài toán, target, metric, horizon | Xác định dự báo `Revenue`, `COGS`, metric WAPE/MAE, horizon từ `sample_submission` | Chưa |
+| Data Description | Load và hiểu dữ liệu thô | Đọc file, xem shape/schema, missing, duplicate, date range, target overview | Chưa |
+| Data Cleaning | Làm sạch lỗi kỹ thuật và ghi log | Strip tên cột, chuẩn hóa date/numeric, đổi chuỗi rỗng thành missing, drop duplicate hoàn toàn, flag giá trị âm, xử lý missing có lý do nghiệp vụ | Chưa |
+| Feature Engineering | Tạo biến dự báo từ dữ liệu sạch | Tạo daily target, calendar, promo known-now, aggregate bảng phụ theo ngày, tạo lag/rolling đã shift | Chưa |
+| Data Filtering / Leakage Control | Loại thông tin không nên đưa vào model | Bỏ same-day operational columns, chỉ giữ known-now hoặc lagged features, loại feature leakage/high missing/zero variance | Chưa |
+| EDA / Feature Analysis | Hiểu feature và quan hệ với target | Univariate, Spearman, scatter/binned mean, heatmap redundancy, stability theo năm | Chưa |
+| Feature Selection | Chọn feature có lý do và có bằng chứng | Compact selection, family/signal cap, wrapper time-aware để kiểm tra incremental WAPE | Chưa phải modeling cuối; chỉ là validation để lọc feature |
+| Data Preparation for Modeling | Chốt format sẵn sàng train | Split theo thời gian, impute/scale fit trên train, xuất X/y, feature schema, audit reports | Chuẩn bị ngay trước train |
+| Machine Learning Modeling | Train và chọn model dự báo chính thức | Train baseline, Ridge/LightGBM/XGBoost, rolling-origin validation, tuning | Có |
+| Error Analysis & Deliver | Hiểu lỗi và xuất kết quả | Residual, error by month/day, feature importance, submission, report | Sau train |
+
+### Mapping cho notebook chuẩn bị dữ liệu hiện tại
+
+Với notebook `report_1_6_2026/perparation_data_update.ipynb`, các section nên được hiểu như sau:
+
+| Mục lớn trong notebook | Thuộc bước lớn nào | Mục con cụ thể |
+| :--- | :--- | :--- |
+| `1. Load data và tổng quan` | Data Description | Nạp dữ liệu, kiểm tra sơ bộ shape/schema |
+| `2. Clean data` | Data Cleaning | Chuẩn hóa tên cột, chuỗi rỗng, date/numeric, duplicate, missing/invalid, xử lý business-safe |
+| `3. Feature Engineering` | Feature Engineering + Leakage Control | `3.1` tạo target, `3.2` known-now/source aggregate, `3.3` lag/rolling, `3.4` candidate table |
+| `4. Data Filtering & Feature Selection` | Data Filtering + Feature Selection | `4.1` feature catalog, `4.2` quality/relevance, `4.3` compact selection |
+| `5. Feature Analysis & Validation` | EDA + Feature Selection validation | `5.1` univariate, `5.2` bivariate, `5.3` redundancy, `5.4` stability/wrapper/export |
+
+Điểm quan trọng: wrapper time-aware có dùng một model đơn giản để đo incremental WAPE, nhưng mục tiêu của nó là **lọc feature**, không phải train model cuối cùng. Modeling chính thức phải nằm ở notebook/phase riêng sau khi dữ liệu và feature set đã sẵn sàng.
+
+### Checklist định hướng trước khi sang modeling
+
+Trước khi gọi một notebook là "đã chuẩn bị dữ liệu xong để train", cần trả lời được:
+
+```text
+[ ] Đã load và mô tả dữ liệu thô.
+[ ] Đã có bước clean data riêng sau load, trước khi tạo target.
+[ ] Đã tạo target ở đúng grain và không tự fill target missing tùy tiện.
+[ ] Đã tạo feature từ dữ liệu sạch.
+[ ] Đã phân biệt known-now, lagged, same-day và leakage columns.
+[ ] Đã loại hoặc shift các feature có rủi ro leakage.
+[ ] Đã phân tích feature bằng EDA đơn biến/song biến/đa biến.
+[ ] Đã chọn feature có lý do, không chỉ dựa vào correlation.
+[ ] Đã có feature set cuối và audit report để đưa sang modeling.
+[ ] Chưa gọi wrapper/EDA là model cuối cùng.
+```
+
+---
+
 ## Bước 01 — Business Understanding
 
 ### Mục tiêu

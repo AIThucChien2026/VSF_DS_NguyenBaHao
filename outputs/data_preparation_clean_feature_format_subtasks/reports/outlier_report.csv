@@ -1,9 +1,0 @@
-table,column,outlier_count,outlier_pct,iqr_low,iqr_high,action
-sales,Revenue,169,4.41,-1848593.7500000005,9670559.77,flag_only
-sales,COGS,165,4.3,-1579490.3050000002,8367364.455,flag_only
-order_items,quantity,0,0.0,-4.0,12.0,flag_only
-order_items,unit_price,8623,1.21,-6143.415,15324.065,flag_only
-order_items,discount_amount,105767,14.8,-1451.445,2419.075,flag_only
-returns,refund_amount,2778,6.96,-16389.497499999994,36844.88249999999,flag_only
-web_traffic,sessions,0,0.0,-4926.0,53808.0,flag_only
-web_traffic,page_views,18,0.49,-24674.0,235742.0,flag_only

@@ -1,0 +1,25 @@
+﻿item,value
+phase5_best_model,lightgbm
+phase5_best_wape,0.17731573417720944
+raw_best_phase9_candidate,lightgbm
+raw_best_phase9_wape,0.17731573417720944
+raw_best_wape_change_vs_phase5,0.0
+phase9_best_model,lightgbm
+phase9_best_feature_set,selected_features_21
+phase9_best_feature_count,21
+phase9_best_iteration,300
+phase9_best_refit_on_full_train,False
+phase9_best_early_stopping_metric,none
+phase9_best_params_json,"{""n_estimators"": 300, ""learning_rate"": 0.05, ""random_state"": 42, ""n_jobs"": -1, ""verbosity"": -1}"
+phase9_best_wape,0.17731573417720944
+phase9_best_mae,490332.4370507268
+phase9_best_rmse,696490.047756988
+baseline_wape,0.2272912016562102
+material_wape_threshold,0.003
+material_improvement,False
+selection_reason,"Không candidate nào giảm WAPE đủ 0.003 so với Phase 5, nên giữ model mốc từ Phase 5."
+cyclic_calendar_features,"is_sunday,is_monday,dow_sin,dow_cos,month_sin,month_cos"
+calendar_rescue_selected,False
+beats_phase5_best_by_wape,False
+beats_baseline_by_wape,True
+wape_change_vs_phase5,0.0

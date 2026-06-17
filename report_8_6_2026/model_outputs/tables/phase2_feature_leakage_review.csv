@@ -1,0 +1,22 @@
+﻿selected_order,feature,source_table,family,type,leakage_risk,quality_action,relevance_action,stable_flag,family_wrapper_decision,handoff_note,is_in_model_df,name_based_warning,metadata_warning,needs_review
+1.0,Gross_Profit_rolling_7d_mean,sales,Gross_Profit,rolling,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+2.0,Gross_Margin_rolling_7d_mean,sales,Gross_Margin,rolling,low if shifted,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+3.0,Revenue_rolling_28d_mean,sales,Revenue,rolling,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+4.0,Revenue_lag_1d,sales,Revenue,lag,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+5.0,Revenue_pct_change_7d,sales,Revenue,change,low if shifted,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+6.0,page_views_lag_14d,web_traffic,page_views,lag,low if lagged,KEEP,KEEP,PASS,POTENTIAL KEEP,Được chọn vào dataset modeling cuối.,True,False,False,False
+7.0,cos_month,Date,cos_month,calendar,low known-now,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+8.0,Gross_Profit_rolling_28d_mean,sales,Gross_Profit,rolling,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+9.0,year,Date,year,calendar,low known-now,KEEP,KEEP,REVIEW,,Được chọn vào dataset modeling cuối.,True,False,False,False
+10.0,is_month_start,Date,is_month_start,calendar,low known-now,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+11.0,Revenue_rolling_7d_mean,sales,Revenue,rolling,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+12.0,Gross_Margin_rolling_28d_mean,sales,Gross_Margin,rolling,low if shifted,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+13.0,Gross_Margin_lag_7d,sales,Gross_Margin,lag,low if shifted,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+14.0,Gross_Margin_lag_1d,sales,Gross_Margin,lag,low if shifted,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+15.0,Gross_Profit_lag_1d,sales,Gross_Profit,lag,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+16.0,Revenue_diff_1d,sales,Revenue,diff,low if shifted,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+17.0,is_month_end,Date,is_month_end,calendar,low known-now,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+18.0,day_of_month,Date,day_of_month,calendar,low known-now,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+19.0,Gross_Profit_lag_7d,sales,Gross_Profit,lag,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+20.0,Revenue_lag_28d,sales,Revenue,lag,low if shifted,KEEP,KEEP,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False
+21.0,quarter,Date,quarter,calendar,low known-now,KEEP,REVIEW,PASS,,Được chọn vào dataset modeling cuối.,True,False,False,False

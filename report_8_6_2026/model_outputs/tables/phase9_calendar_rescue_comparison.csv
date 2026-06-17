@@ -1,0 +1,3 @@
+﻿model_name,experiment_group,feature_set,mae,rmse,wape,sunday_wape,calendar_sunday_not_worse
+lightgbm,reference,selected_features_21,490332.4370507268,696490.047756988,0.17731573417720944,0.20355812786159655,True
+lgbm_slow_learning_cyclic_calendar,calendar_rescue,selected_features_cyclic_calendar,494565.7446809814,684456.366260835,0.1788465977174058,0.21701628392302422,False

@@ -1,0 +1,4 @@
+﻿dataset,planned_start,planned_end,actual_start,actual_end,row_count,duplicate_date_count,missing_calendar_dates,target_missing_rows,feature_missing_cells
+train,2012-07-04,2020-11-24,2013-01-15,2020-11-24,2871,0,0,0,0
+validation,2020-11-25,2021-12-12,2020-11-25,2021-12-12,383,0,0,0,0
+test,2021-12-13,2022-12-31,2021-12-13,2022-12-31,384,0,0,0,0

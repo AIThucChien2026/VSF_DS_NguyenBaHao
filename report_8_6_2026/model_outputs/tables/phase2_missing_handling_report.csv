@@ -1,0 +1,7 @@
+﻿metric,value
+rows_before_missing_handling,3833
+rows_dropped_due_to_missing_feature,195
+rows_after_missing_handling,3638
+missing_values_after_handling,0
+first_date_after_handling,2013-01-15 00:00:00
+last_date_after_handling,2022-12-31 00:00:00

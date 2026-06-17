@@ -1,0 +1,6 @@
+﻿item,value,plain_language_note
+phase5_best_model,lightgbm,Model mốc tốt nhất từ Phase 5.
+phase5_best_wape,0.17731573417720944,WAPE mốc để so sánh. Phase 9 phải thắng mốc này đủ rõ.
+phase5_sunday_wape,0.2035581278615965,Sunday là nhóm weekday yếu cần kiểm tra riêng.
+phase5_low_revenue_wape,0.2831555806174385,Low revenue là nhóm doanh thu yếu cần kiểm tra riêng.
+material_wape_threshold,0.003,Ngưỡng tối thiểu để nhận là cải thiện đáng kể.

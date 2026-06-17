@@ -1,0 +1,6 @@
+﻿item,value
+business_goal,Dự báo doanh thu theo ngày
+problem_type,Regression
+target,Revenue
+grain,1 dòng = 1 ngày
+selected_feature_count,21

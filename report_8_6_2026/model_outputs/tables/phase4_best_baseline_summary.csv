@@ -1,0 +1,6 @@
+﻿item,value
+best_baseline_by_validation_wape,yesterday_baseline
+validation_wape,0.2272912016562102
+validation_mae,628529.9460052219
+test_wape_of_best_baseline,0.22613017595775137
+test_mae_of_best_baseline,710548.0245572916

@@ -1,8 +1,0 @@
-﻿table,date_column,rows,missing_date_rows,min_date,max_date,unique_dates,expected_days_between_min_max,missing_days_between_min_max,missing_months_between_min_max
-sales,Date,3833,0,2012-07-04,2022-12-31,3833,3833,0,0
-sample_submission,Date,548,0,2023-01-01,2024-07-01,548,548,0,0
-orders,order_date,646945,0,2012-07-04,2022-12-31,3833,3833,0,0
-returns,return_date,39939,0,2012-07-11,2022-12-31,3806,3826,20,0
-reviews,review_date,113551,0,2012-07-10,2022-12-31,3825,3827,2,0
-web_traffic,date,3652,0,2013-01-01,2022-12-31,3652,3652,0,0
-inventory,snapshot_date,60247,0,2012-07-31,2022-12-31,126,3806,3680,0

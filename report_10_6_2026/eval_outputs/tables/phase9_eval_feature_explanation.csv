@@ -1,0 +1,11 @@
+﻿feature,importance,importance_share,rank,feature_set,in_final_feature_list,feature_group,leakage_review,business_explanation
+day_of_month,914,0.1015555555555555,1,selected_features_21,True,calendar,ok,Calendar feature giúp model học pattern theo ngày/tháng/quý.
+Revenue_pct_change_7d,800,0.0888888888888888,2,selected_features_21,True,lag_revenue,ok,Feature lịch sử doanh thu giúp model học quán tính và biến động gần đây.
+Revenue_lag_1d,712,0.0791111111111111,3,selected_features_21,True,lag_revenue,ok,Feature lịch sử doanh thu giúp model học quán tính và biến động gần đây.
+Revenue_lag_28d,687,0.0763333333333333,4,selected_features_21,True,lag_revenue,ok,Feature lịch sử doanh thu giúp model học quán tính và biến động gần đây.
+Revenue_diff_1d,620,0.0688888888888888,5,selected_features_21,True,lag_revenue,ok,Feature lịch sử doanh thu giúp model học quán tính và biến động gần đây.
+Gross_Profit_lag_1d,502,0.0557777777777777,6,selected_features_21,True,gross_profit_margin,ok,Gross profit/margin phản ánh chất lượng doanh thu và biên lợi nhuận trong quá khứ.
+page_views_lag_14d,486,0.054,7,selected_features_21,True,web_traffic,ok,Web traffic có thể phản ánh nhu cầu trước khi doanh thu xảy ra.
+Revenue_rolling_28d_mean,478,0.0531111111111111,8,selected_features_21,True,rolling_revenue,ok,Rolling revenue giúp model nhìn xu hướng doanh thu trong nhiều ngày.
+Gross_Margin_rolling_28d_mean,461,0.0512222222222222,9,selected_features_21,True,gross_profit_margin,ok,Gross profit/margin phản ánh chất lượng doanh thu và biên lợi nhuận trong quá khứ.
+Gross_Margin_lag_7d,453,0.0503333333333333,10,selected_features_21,True,gross_profit_margin,ok,Gross profit/margin phản ánh chất lượng doanh thu và biên lợi nhuận trong quá khứ.

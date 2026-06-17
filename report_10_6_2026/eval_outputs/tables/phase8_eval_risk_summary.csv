@@ -1,0 +1,7 @@
+﻿topic,summary
+prediction_negative,Có 0 prediction âm trên test.
+prediction_flatness,std(prediction) / std(actual) = 0.873.
+bias,"Mean error = 99,915, model hay dự báo thấp ở mức trung bình."
+validation_test_stability,Test WAPE - validation WAPE = -0.0024.
+time_risk,Tháng cần theo dõi nhất là 2022-11 với WAPE 0.2750.
+revenue_group_risk,Nhóm doanh thu cần theo dõi nhất là low_revenue với WAPE 0.2657.

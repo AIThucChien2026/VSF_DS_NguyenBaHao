@@ -1,0 +1,20 @@
+﻿item,value
+final_model,lightgbm
+training_data_used,train + validation
+test_used_for_tuning,False
+selected_feature_count,21
+final_feature_set,selected_features_21
+phase9_material_improvement,False
+phase9_selection_reason,"Không candidate nào giảm WAPE đủ 0.003 so với Phase 5, nên giữ model mốc từ Phase 5."
+validation_wape,0.17731573417720944
+test_wape,0.17495016480616768
+test_mae,549729.789367963
+baseline_test_wape,0.2261301759577513
+beats_baseline_on_test,True
+wape_gap_test_minus_validation,-0.0023655693710417647
+negative_prediction_count,0
+std_ratio_pred_vs_actual,0.8734405873614639
+test_win_rate_vs_baseline,0.5963541666666666
+strength,Được chọn bằng validation và kiểm tra một lần trên test.
+weakness,Vẫn có thể sai mạnh ở các ngày doanh thu biến động bất thường; Phase 9 không nhận cải thiện nhỏ là cải thiện thật.
+remaining_risk,"Cần theo dõi distribution shift giữa train, validation và test khi báo cáo."

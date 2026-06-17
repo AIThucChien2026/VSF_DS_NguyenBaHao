@@ -1,0 +1,4 @@
+﻿dataset,start_date,end_date,note
+train,2012-07-04,2020-11-24,"Chỉ là kế hoạch, chưa split ở Phase 0-2"
+validation,2020-11-25,2021-12-12,"Chỉ là kế hoạch, chưa split ở Phase 0-2"
+test,2021-12-13,2022-12-31,"Chỉ là kế hoạch, chưa split ở Phase 0-2"

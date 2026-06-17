@@ -1,0 +1,3 @@
+﻿model_name,mean_error_actual_minus_pred,mean_abs_error,median_abs_error,max_abs_error,worst_error_date,worst_error_actual,worst_error_prediction
+lightgbm,-26446.716072812997,490332.4370507268,359138.852601015,4407687.08830928,2021-03-30,10795905.35,6388218.26169072
+yesterday_baseline,131.32146214099245,628529.9460052219,397125.97,6705814.75,2021-03-30,10795905.35,4090090.6

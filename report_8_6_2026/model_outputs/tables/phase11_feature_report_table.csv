@@ -1,0 +1,11 @@
+﻿feature,importance,importance_share,rank,feature_set,in_final_feature_list
+day_of_month,914,0.1015555555555555,1,selected_features_21,True
+Revenue_pct_change_7d,800,0.0888888888888888,2,selected_features_21,True
+Revenue_lag_1d,712,0.0791111111111111,3,selected_features_21,True
+Revenue_lag_28d,687,0.0763333333333333,4,selected_features_21,True
+Revenue_diff_1d,620,0.0688888888888888,5,selected_features_21,True
+Gross_Profit_lag_1d,502,0.0557777777777777,6,selected_features_21,True
+page_views_lag_14d,486,0.054,7,selected_features_21,True
+Revenue_rolling_28d_mean,478,0.0531111111111111,8,selected_features_21,True
+Gross_Margin_rolling_28d_mean,461,0.0512222222222222,9,selected_features_21,True
+Gross_Margin_lag_7d,453,0.0503333333333333,10,selected_features_21,True

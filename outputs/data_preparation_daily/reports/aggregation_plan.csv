@@ -1,6 +1,0 @@
-source_table,output_table,source_grain,output_grain,aggregation_logic,leakage_note
-web_traffic,traffic_daily_features,date x source,Date,sum/mean/nunique,lag before model use
-orders,orders_daily_features,order,Date,daily counts by order_date,lag before model use
-order_items+orders+products,items_daily_features,order item,Date,daily sums/nunique,lag before model use
-returns,returns_daily_features,return event,Date,daily sums/counts,high risk; lag only
-inventory,inventory_daily_features,product snapshot,Date,daily snapshot aggregate,use lag/<= cutoff only

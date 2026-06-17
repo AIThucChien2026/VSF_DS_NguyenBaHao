@@ -1,0 +1,12 @@
+﻿phase,name,report_message
+0,Setup,Import libraries and load feature engineering input.
+1,Problem definition,"Define Revenue target, daily grain, and feature set."
+2,Modeling table,Create clean modeling table and handle missing values.
+3,Time split,Split train/validation/test by time.
+4,Baseline,Use yesterday_baseline as comparison baseline.
+5,Initial ML model,Train initial ML model on train and evaluate validation.
+6,Metric policy,Use WAPE as the main metric.
+7,Error analysis,"Analyze top errors by time, weekday, and revenue group."
+8,Model explanation,Explain model using feature importance.
+9,Improvement,Tune LightGBM and test calendar rescue on validation.
+10,Final evaluation,Train final model and evaluate test once.

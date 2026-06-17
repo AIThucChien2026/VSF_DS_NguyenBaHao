@@ -1,3 +1,0 @@
-target_column,source_table,grain,missing_count,status
-Revenue,sales,daily,0,ready
-COGS,sales,daily,0,ready

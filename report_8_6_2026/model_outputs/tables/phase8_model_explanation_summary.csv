@@ -1,0 +1,10 @@
+﻿item,value
+best_model,lightgbm
+top_5_features,"day_of_month, Revenue_pct_change_7d, Revenue_lag_1d, Revenue_lag_28d, Revenue_diff_1d"
+top_3_importance_share,0.26955555555555555
+top_5_importance_share,0.4147777777777778
+top_10_importance_share,0.6792222222222222
+top_feature,day_of_month
+top_feature_importance_share,0.10155555555555555
+top_feature_review_count,10
+top_feature_possible_leakage_review_count,0

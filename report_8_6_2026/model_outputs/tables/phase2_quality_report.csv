@@ -1,0 +1,12 @@
+﻿metric,value
+row_count,3833
+column_count,24
+selected_feature_count,21
+min_date,2012-07-04 00:00:00
+max_date,2022-12-31 00:00:00
+unique_dates,3833
+duplicate_date_count,0
+missing_calendar_dates,0
+target_missing_rows,0
+target_negative_rows,0
+feature_missing_cells,255

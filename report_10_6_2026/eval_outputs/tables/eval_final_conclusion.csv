@@ -1,0 +1,11 @@
+﻿section,conclusion
+performance,"Final model test WAPE = 0.1750, baseline test WAPE = 0.2261."
+performance,"Model cải thiện WAPE tuyệt đối 0.0512, tương đương 22.63% so với baseline."
+stability,"Validation WAPE = 0.1773, test WAPE = 0.1750, gap = -0.0024."
+stability,Prediction âm: 0; std ratio prediction/actual = 0.873.
+strength,Model thắng yesterday baseline trên test và được đánh giá theo time-based split.
+strength,"Test set không dùng để tuning, nên kết quả test phù hợp vai trò đánh giá cuối cùng."
+weakness,"Model vẫn sai mạnh ở một số ngày biến động lớn; top error day lớn nhất có absolute error 3,958,786."
+weakness,Nhóm doanh thu cần theo dõi nhất là low_revenue; tháng cần theo dõi nhất là 2022-11.
+recommendation,"Khi dùng thực tế, nên theo dõi WAPE theo tháng và theo nhóm doanh thu."
+recommendation,Nên cập nhật hoặc kiểm tra lại model khi dữ liệu mới có dấu hiệu distribution shift.

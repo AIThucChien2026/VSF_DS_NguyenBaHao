@@ -1,0 +1,6 @@
+﻿section,text
+performance,"Final model lightgbm reached test WAPE 17.50%, baseline yesterday_baseline reached 22.61%, improving 22.63% versus baseline."
+model_selection,The final model was selected using validation; the test set was used once in Phase 10 for final evaluation.
+strength,Được chọn bằng validation và kiểm tra một lần trên test.
+weakness,Vẫn có thể sai mạnh ở các ngày doanh thu biến động bất thường; Phase 9 không nhận cải thiện nhỏ là cải thiện thật.
+remaining_risk,"Cần theo dõi distribution shift giữa train, validation và test khi báo cáo."

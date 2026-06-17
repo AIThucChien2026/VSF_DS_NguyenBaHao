@@ -98,7 +98,11 @@ def find_project_root(start: str | Path | None = None, markers: Sequence[str] = 
 
 
 def show(df, n: int = 20, title: str | None = None, sort_by: str | None = None, ascending: bool = False):
-    """Display the first n rows of a dataframe with an optional title."""
+    """Display the first n rows of a dataframe with an optional title.
+
+    Return None so notebooks do not render the displayed object a second time
+    when show(...) is the last expression in a cell.
+    """
     if title:
         print(f"\n{title}")
     if df is None:
@@ -106,12 +110,12 @@ def show(df, n: int = 20, title: str | None = None, sort_by: str | None = None, 
         return None
     if not hasattr(df, "head"):
         display(df)
-        return df
+        return None
     out = df.copy()
     if sort_by and sort_by in out.columns:
         out = out.sort_values(sort_by, ascending=ascending)
     display(out.head(n))
-    return out.head(n)
+    return None
 
 
 def note(title: str, bullets: Sequence[str]) -> None:
@@ -494,18 +498,18 @@ def _ax(ax=None, figsize=(10, 5)):
     return ax
 
 
-def plot_missing_bar(df: pd.DataFrame, top: int = 20, ax=None, title: str = "Top missing columns"):
+def plot_missing_bar(df: pd.DataFrame, top: int = 20, ax=None, title: str = "Top missing columns") -> None:
     report = missing_report(df).head(top).sort_values("missing_pct")
     ax = _ax(ax, figsize=(9, max(4, top * 0.28)))
     if report.empty:
         ax.text(0.5, 0.5, "No missing values", ha="center", va="center")
         ax.set_axis_off()
-        return ax
+        return None
     sns.barplot(data=report, x="missing_pct", y="column", ax=ax, color="#4c78a8")
     ax.set_title(title)
     ax.set_xlabel("Missing (%)")
     ax.set_ylabel("Column")
-    return ax
+    return None
 
 
 def plot_barh(
@@ -524,14 +528,14 @@ def plot_barh(
     if d.empty:
         ax.text(0.5, 0.5, "No data", ha="center", va="center")
         ax.set_axis_off()
-        return ax
+        return None
     sns.barplot(data=d, x=x, y=y, ax=ax, color=color)
     ax.set_title(title)
     ax.set_xlabel(x)
     ax.set_ylabel(y)
     if formatter:
         ax.xaxis.set_major_formatter(formatter)
-    return ax
+    return None
 
 
 def plot_numeric_grid(df: pd.DataFrame, cols: Sequence[str] | None = None, bins: int = 40, max_cols: int = 12, kde: bool = True):
@@ -552,7 +556,7 @@ def plot_numeric_grid(df: pd.DataFrame, cols: Sequence[str] | None = None, bins:
     for ax in axes[len(cols):]:
         ax.axis("off")
     plt.tight_layout()
-    return fig
+    return None
 
 
 def plot_boxplot_grid(df: pd.DataFrame, cols: Sequence[str] | None = None, max_cols: int = 12):
@@ -573,10 +577,10 @@ def plot_boxplot_grid(df: pd.DataFrame, cols: Sequence[str] | None = None, max_c
     for ax in axes[len(cols):]:
         ax.axis("off")
     plt.tight_layout()
-    return fig
+    return None
 
 
-def plot_category_counts(df: pd.DataFrame, col: str, top: int = 20, ax=None, title: str | None = None):
+def plot_category_counts(df: pd.DataFrame, col: str, top: int = 20, ax=None, title: str | None = None) -> None:
     counts = df[col].value_counts(dropna=False).head(top).reset_index()
     counts.columns = [col, "rows"]
     ax = _ax(ax, figsize=(9, max(4, top * 0.28)))
@@ -585,7 +589,7 @@ def plot_category_counts(df: pd.DataFrame, col: str, top: int = 20, ax=None, tit
     ax.set_xlabel("Rows")
     ax.set_ylabel(col)
     ax.xaxis.set_major_formatter(COUNT_FORMATTER)
-    return ax
+    return None
 
 
 def plot_group_target(
@@ -611,7 +615,7 @@ def plot_group_target(
     ax.set_ylabel(group_col)
     if money_axis:
         ax.xaxis.set_major_formatter(MONEY_FORMATTER)
-    return ax
+    return None
 
 
 def plot_time_series(
@@ -637,10 +641,10 @@ def plot_time_series(
     if money_axis:
         ax.yaxis.set_major_formatter(MONEY_FORMATTER)
     ax.legend()
-    return ax
+    return None
 
 
-def plot_temporal_relation(report: pd.DataFrame, top_features: Sequence[str] | None = None, ax=None):
+def plot_temporal_relation(report: pd.DataFrame, top_features: Sequence[str] | None = None, ax=None) -> None:
     """Line plot for temporal_relation_report output."""
     d = report.copy()
     if top_features is not None:
@@ -652,7 +656,7 @@ def plot_temporal_relation(report: pd.DataFrame, top_features: Sequence[str] | N
     ax.set_ylabel("Absolute Spearman")
     ax.tick_params(axis="x", rotation=45)
     ax.legend(bbox_to_anchor=(1.02, 1), loc="upper left")
-    return ax
+    return None
 
 
 def plot_corr_heatmap(df: pd.DataFrame, cols: Sequence[str] | None = None, method: str = "spearman", ax=None, title: str | None = None):
@@ -661,7 +665,7 @@ def plot_corr_heatmap(df: pd.DataFrame, cols: Sequence[str] | None = None, metho
     ax = _ax(ax, figsize=(max(8, len(use_cols) * 0.45), max(6, len(use_cols) * 0.35)))
     sns.heatmap(corr, cmap="vlag", center=0, ax=ax)
     ax.set_title(title or f"{method.title()} correlation heatmap")
-    return ax
+    return None
 
 
 def plot_feature_vs_target(
@@ -681,7 +685,7 @@ def plot_feature_vs_target(
     if pair.empty:
         ax.text(0.5, 0.5, "No data", ha="center", va="center")
         ax.set_axis_off()
-        return ax
+        return None
 
     if feature_type in {"binary", "low_cardinality", "other"}:
         summary = pair.groupby(feature, dropna=False, as_index=False).agg(
@@ -709,7 +713,7 @@ def plot_feature_vs_target(
     ax.set_xlabel(feature)
     if money_axis:
         ax.yaxis.set_major_formatter(MONEY_FORMATTER)
-    return ax
+    return None
 
 
 def plot_feature_grid(
@@ -732,7 +736,7 @@ def plot_feature_grid(
     for ax in axes[len(features):]:
         ax.axis("off")
     plt.tight_layout()
-    return fig
+    return None
 
 
 def plot_target_relation_bars(report: pd.DataFrame, target: str, top: int = 20, ax=None):
@@ -744,7 +748,7 @@ def plot_target_relation_bars(report: pd.DataFrame, target: str, top: int = 20, 
     ax.set_title(f"Top feature relation with {target}")
     ax.set_xlabel("Absolute Spearman")
     ax.set_ylabel("Feature")
-    return ax
+    return None
 
 
 def plot_actual_vs_pred(y_true, y_pred, ax=None, title: str = "Actual vs predicted", money_axis: bool = False):
@@ -761,7 +765,7 @@ def plot_actual_vs_pred(y_true, y_pred, ax=None, title: str = "Actual vs predict
     if money_axis:
         ax.xaxis.set_major_formatter(MONEY_FORMATTER)
         ax.yaxis.set_major_formatter(MONEY_FORMATTER)
-    return ax
+    return None
 
 
 def plot_residuals(y_true, y_pred, ax=None, title: str = "Residual distribution"):
@@ -772,7 +776,7 @@ def plot_residuals(y_true, y_pred, ax=None, title: str = "Residual distribution"
     ax.set_title(title)
     ax.set_xlabel("Residual")
     ax.set_ylabel("Rows")
-    return ax
+    return None
 
 
 def save_table(df: pd.DataFrame, path: str | Path, index: bool = False) -> Path:

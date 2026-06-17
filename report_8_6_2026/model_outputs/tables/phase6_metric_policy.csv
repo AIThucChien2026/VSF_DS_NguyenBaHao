@@ -1,0 +1,5 @@
+﻿metric,role,reason,used_for_selection
+WAPE,main,"Dễ hiểu theo tỷ lệ tổng doanh thu, phù hợp báo cáo kinh doanh.",True
+MAE,supporting,Cho biết trung bình mỗi ngày sai bao nhiêu tiền.,False
+RMSE,supporting,Phạt mạnh các ngày sai rất lớn.,False
+MAPE,not_main,Không dùng chính vì doanh thu có thể thấp hoặc gần 0.,False

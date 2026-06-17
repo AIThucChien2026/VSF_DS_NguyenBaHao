@@ -1,0 +1,23 @@
+﻿item,value
+business_goal,Dự báo doanh thu theo ngày
+problem_type,Regression
+target,Revenue
+grain,1 dòng = 1 ngày
+split_summary,train: 2013-01-15 to 2020-11-24 (2871 rows); validation: 2020-11-25 to 2021-12-12 (383 rows); test: 2021-12-13 to 2022-12-31 (384 rows)
+baseline_model,yesterday_baseline
+final_model,lightgbm
+final_feature_count,21
+main_metric,WAPE
+validation_wape_final_model,0.1773157341772094
+validation_wape_baseline,0.2272912016562102
+test_wape_final_model,0.1749501648061676
+test_wape_baseline,0.2261301759577513
+test_wape_improvement_abs,0.051180011151583715
+test_wape_improvement_pct_vs_baseline,22.63298603771743
+test_mae_final_model,549729.789367963
+test_rmse_final_model,763915.0591079803
+beats_baseline_on_test,True
+test_used_for_tuning,False
+strength,Được chọn bằng validation và kiểm tra một lần trên test.
+weakness,Vẫn có thể sai mạnh ở các ngày doanh thu biến động bất thường; Phase 9 không nhận cải thiện nhỏ là cải thiện thật.
+remaining_risk,"Cần theo dõi distribution shift giữa train, validation và test khi báo cáo."

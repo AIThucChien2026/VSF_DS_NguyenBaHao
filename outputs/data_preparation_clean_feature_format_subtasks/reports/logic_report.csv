@@ -1,4 +1,0 @@
-table,column,check,issue_count,action
-sales,Revenue/COGS,very_low_margin_day,0,review_only
-order_items,unit_price/cogs,price_below_cogs,104407,review_only
-order_items,discount/gross,discount_exceeds_gross,0,review_only

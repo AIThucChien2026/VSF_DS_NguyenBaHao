@@ -1,0 +1,6 @@
+﻿metric,value
+expected_daily_dates,3833
+actual_unique_dates,3833
+missing_calendar_dates,0
+first_missing_date,
+last_missing_date,

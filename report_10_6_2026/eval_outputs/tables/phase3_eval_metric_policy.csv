@@ -1,0 +1,5 @@
+﻿metric,role,meaning,why_use,formula
+WAPE,metric_chinh,Sai số theo tỷ lệ tổng doanh thu,Phù hợp để báo cáo lỗi tổng thể của bài toán doanh thu daily,sum(abs(actual - prediction)) / sum(actual)
+MAE,metric_phu,Sai số trung bình theo đơn vị tiền mỗi ngày,Giúp diễn giải model đang lệch trung bình bao nhiêu doanh thu mỗi ngày,mean(abs(actual - prediction))
+RMSE,metric_phu,Sai số lớn bị phạt nặng hơn,Giúp nhận biết model có vài ngày sai rất lớn hay không,sqrt(mean((actual - prediction)^2))
+MAPE,khong_dung_lam_metric_chinh,Sai số phần trăm trung bình theo từng ngày,Ngày doanh thu thấp có thể làm phần trăm lỗi bị phóng đại,mean(abs((actual - prediction) / actual))

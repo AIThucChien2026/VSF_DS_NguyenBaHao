@@ -1,0 +1,9 @@
+﻿item,value
+best_model_by_validation_wape,lightgbm
+best_model_validation_wape,0.17731573417720944
+best_model_validation_mae,490332.4370507268
+baseline_to_beat,yesterday_baseline
+baseline_validation_wape,0.2272912016562102
+baseline_validation_mae,628529.9460052219
+beats_baseline_by_wape,True
+wape_improvement_vs_baseline,0.04997546747900075

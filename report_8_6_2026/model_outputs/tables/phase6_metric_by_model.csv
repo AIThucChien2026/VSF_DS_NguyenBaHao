@@ -1,0 +1,3 @@
+﻿model_type,model_name,dataset,row_count,mae,rmse,wape
+ml_model,lightgbm,validation,383,490332.4370507268,696490.047756988,0.1773157341772094
+baseline,yesterday_baseline,validation,383,628529.9460052219,977989.4537304743,0.2272912016562102
