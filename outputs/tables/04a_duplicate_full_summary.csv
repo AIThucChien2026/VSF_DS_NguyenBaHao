@@ -1,0 +1,15 @@
+﻿table,rows,duplicate_full_rows,duplicate_full_pct
+customers,121930,0,0.0
+geography,39948,0,0.0
+inventory,60247,0,0.0
+order_items,714669,0,0.0
+orders,646945,0,0.0
+payments,646945,0,0.0
+products,2412,0,0.0
+promotions,50,0,0.0
+returns,39939,0,0.0
+reviews,113551,0,0.0
+sales,3833,0,0.0
+sample_submission,548,0,0.0
+shipments,566067,0,0.0
+web_traffic,3652,0,0.0

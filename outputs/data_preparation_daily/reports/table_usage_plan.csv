@@ -1,0 +1,15 @@
+table_name,default_status,allowed_use,leakage_risk,reason
+sales,use,base target table by Date,low,Contains official daily Revenue and COGS
+sample_submission,template_only,forecast horizon/template,none,Must not be used as training labels
+web_traffic,use_with_lag,traffic lag/rolling features,medium,Same-day traffic may be unknown at prediction time
+orders,use_aggregate_daily,daily order count/source/status features,medium,Use only lagged aggregate features by default
+order_items,use_aggregate_daily,daily quantity/revenue/discount features,medium,Aggregate to daily grain before join
+products,use_before_aggregate,COGS/category support for item features,low,Join to items before daily aggregate if columns exist
+returns,use_with_lag,return/refund lag/rolling features,high,Return events happen after purchase
+inventory,conditional,snapshot features at or before prediction date,medium,No future snapshots
+shipments,exclude_v1,not used in default daily model,high,Fulfillment outcome may be future information
+reviews,exclude_v1,not used in default daily model,high,Post-purchase signal
+customers,optional,not used in v1,medium,Would require customer-history aggregation
+payments,optional,not used in v1,medium,Payment realized data may need cutoff
+promotions,optional,not used in v1,medium,Needs clear campaign calendar/cutoff
+geography,optional,not used in v1,low,More useful for order-level/customer-level models

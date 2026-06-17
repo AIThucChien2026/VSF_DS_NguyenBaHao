@@ -1,0 +1,16 @@
+# File list
+
+- customers: 121930 rows, 7 columns
+- geography: 39948 rows, 4 columns
+- inventory: 60247 rows, 17 columns
+- order_items: 714669 rows, 7 columns
+- orders: 646945 rows, 8 columns
+- payments: 646945 rows, 4 columns
+- products: 2412 rows, 8 columns
+- promotions: 50 rows, 10 columns
+- returns: 39939 rows, 7 columns
+- reviews: 113551 rows, 7 columns
+- sales: 3833 rows, 3 columns
+- sample_submission: 548 rows, 3 columns
+- shipments: 566067 rows, 4 columns
+- web_traffic: 3652 rows, 7 columns

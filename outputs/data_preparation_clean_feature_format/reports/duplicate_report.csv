@@ -1,0 +1,12 @@
+table,exact_duplicate_rows,rows_before,rows_after
+sales,0,3833,3833
+sample_submission,0,548,548
+web_traffic,0,3652,3652
+orders,0,646945,646945
+order_items,0,714669,714669
+products,0,2412,2412
+returns,0,39939,39939
+reviews,0,113551,113551
+promotions,0,50,50
+inventory,0,60247,60247
+customers,0,121930,121930

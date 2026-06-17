@@ -1,0 +1,6 @@
+check,pass
+X_train_no_missing,True
+X_valid_no_missing,True
+train_before_valid,True
+date_not_in_X,True
+target_not_in_X,True

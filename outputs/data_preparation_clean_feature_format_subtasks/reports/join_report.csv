@@ -1,0 +1,9 @@
+feature_table,rows_before,rows_after,unmatched_days
+traffic,3833,3833,181
+orders,3833,3833,0
+items,3833,3833,0
+returns,3833,3833,27
+inventory,3833,3833,27
+promotions,3833,3833,0
+reviews,3833,3833,8
+customers,3833,3833,5

@@ -1,0 +1,179 @@
+Chapter 4. Data Preparation
+Data Preparation Overview
+Data preparation is one of the most important and often time-consuming aspects of data mining. In fact,
+it is estimated that data preparation usually takes 50-70% of a project's time and effort. Devoting
+adequate energy to the earlier business understanding and data understanding phases can minimize this
+overhead, but you still need to expend a good amount of effort preparing and packaging the data for
+mining.
+Depending on your organization and its goals, data preparation typically involves the following tasks:
+• Merging data sets and/or records
+• Selecting a sample subset of data
+• Aggregating records
+• Deriving new attributes
+• Sorting the data for modeling
+• Removing or replacing blank or missing values
+• Splitting into training and test data sets
+Selecting Data
+Based upon the initial data collection conducted in the previous CRISP-DM phase, you are ready to begin
+selecting the data relevant to your data mining goals. Generally, there are two ways to select data:
+• Selecting items (rows) involves making decisions such as which accounts, products, or customers to
+include.
+• Selecting attributes or characteristics (columns) involves making decisions about the use of
+characteristics such as transaction amount or household income.
+E-Retail Example--Selecting Data
+A Web-Mining Scenario Using CRISP-DM
+Many of the e-retailer's decisions about which data to select have already been made in earlier phases of
+the data mining process.
+Selecting items. The initial study will be limited to the (approximately) 30,000 customers who have
+registered on the site, so filters need to be set up to exclude purchases and Web logs of nonregistered
+customers. Other filters should be established to remove calls to image files and other non-informative
+entries in the Web logs.
+Selecting attributes. The purchase database will contain sensitive information about the e-retailer's
+customers, so it is important to filter attributes such as the customer name, address, phone number, and
+credit card numbers.
+Including or Excluding Data
+As you decide upon subsets of data to include or exclude, be sure to document the rationale behind your
+decisions.
+Questions to Consider
+• Is a given attribute relevant to you data mining goals?
+• Does the quality of a particular data set or attribute preclude the validity of your results?
+• Can you salvage such data?
+• Are there any constraints on using particular fields such as gender or race?
+Are your decisions here different than the hypotheses formulated in the data understanding phase? If so,
+be sure to document your reasoning in the project report.
+Cleaning Data
+Cleaning your data involves taking a closer look at the problems in the data that you've chosen to include
+for analysis. There are several ways to clean data using the Record and Field Operation nodes in IBM
+SPSS Modeler.
+Table 2. Cleaning data
+Data Problem Possible Solution
+Missing data Exclude rows or characteristics. Or, fill blanks with an estimated
+value.
+Data errors Use logic to manually discover errors and replace. Or, exclude
+characteristics.
+Coding inconsistencies Decide upon a single coding scheme, then convert and replace
+values.
+Missing or bad metadata Manually examine suspect fields and track down correct meaning.
+The Data Quality Report prepared during the data understanding phase contains details about the types
+of problems particular to your data. You can use it as a starting point for data manipulation in IBM SPSS
+Modeler.
+E-Retail Example--Cleaning Data
+A Web-Mining Scenario Using CRISP-DM
+The e-retailer uses the data cleaning process to address the problems noted in the data quality report.
+Missing data. Customers who did not complete the online questionnaire may have to be left out of some
+of the models later on. These customers could be asked again to fill out the questionnaire, but this will
+take time and money that the e-retailer cannot afford to spend. What the e-retailer can do is model the
+purchasing differences between customers who do and do not answer the questionnaire. If these two
+sets of customers have similar purchasing habits, the missing questionnaires are less worrisome.
+Data errors. Errors found during the exploration process can be corrected here. For the most part,
+though, proper data entry is enforced on the Web site before a customer submits a page to the back-end
+database.
+Measurement errors. Poorly worded items on the questionnaire can greatly affect the quality of the data.
+As with missing questionnaires, this is a difficult problem because there may not be time or money
+available to collect answers to a new replacement question. For problematic items, the best solution may
+be to go back to the selection process and filter these items from further analyses.
+Writing a Data Cleaning Report
+Reporting your data-cleaning efforts is essential for tracking alterations to the data. Future data mining
+projects will benefit from having the details of your work readily available.
+Task List
+It's a good idea to consider the following questions when writing the report:
+• What types of noise occurred in the data?
+• What approaches did you use to remove the noise? Which techniques were successful?
+20 IBM SPSS Modeler CRISP-DM Guide
+• Are there any cases or attributes that could not be salvaged? Be sure to note data excluded due to
+noise.
+Constructing New Data
+It is frequently the case that you'll need to construct new data. For example, it may be useful to create a
+new column flagging the purchase of an extended warranty for each transaction. This new field,
+purchased_warranty, can easily be generated using a Set to Flag node in IBM SPSS Modeler.
+There are two ways to construct new data:
+• Deriving attributes (columns or characteristics)
+• Generating records (rows)
+IBM SPSS Modeler offers a multitude of ways to construct data using its Record and Field Operations
+nodes.
+E-Retail Example--Constructing Data
+A Web-Mining Scenario Using CRISP-DM
+The processing of Web logs can create many new attributes. For the events recorded in the logs, the eretailer will want to create timestamps, identify visitors and sessions, and note the page accessed and the
+type of activity the event represents. Some of these variables will be used to create more attributes, such
+as the time between events within a session.
+Further attributes can be created as a result of a merge or other data restructuring. For example, when the
+event-per-row Web logs are "rolled up" so that each row is a session, new attributes recording the total
+number of actions, total time spent, and total purchases made during the session will be created. When
+the Web logs are merged with the customer database so that each row is a customer, new attributes
+recording the number of sessions, total number of actions, total time spent, and total purchases made by
+each customer will be created.
+After constructing new data, the e-retailer goes through an exploration process to make sure that the data
+creation was performed correctly.
+Deriving Attributes
+In IBM SPSS Modeler, you can use the following Field Operations nodes to derive new attributes:
+• Create new fields derived from existing ones using a Derive node.
+• Create a flag field using a Set to Flag node.
+Task List
+• Consider the data requirements for modeling when deriving attributes. Does the modeling algorithm
+expect a particular type of data, such as numeric? If so, perform the necessary transformations.
+• Do the data need be normalized before modeling?
+• Can missing attributes be constructed using aggregation, averaging, or induction?
+• Based upon your background knowledge, are there important facts (such as length of time spent at the
+Web site) that can be derived from existing fields?
+Integrating Data
+It is not uncommon to have multiple data sources for the same set of business questions. For example,
+you may have access to mortgage loan data as well as purchased demographic data for the same set of
+clients. If these data sets contain the same unique identifier (such as social security number), you can
+merge them in IBM SPSS Modeler using this key field.
+There are two basic methods of integrating data:
+Chapter 4. Data Preparation 21
+• Merging data involves merging two data sets with similar records but different attributes. The data is
+merged using the same key identifier for each record (such as customer ID). The resulting data
+increases in columns or characteristics.
+• Appending data involves integrating two or more data sets with similar attributes but different records.
+The data is integrated based upon a similar fields (such as product name or contract length).
+E-Retail Example--Integrating Data
+A Web-Mining Scenario Using CRISP-DM
+With multiple data sources, there are many different ways in which the e-retailer can integrate data:
+• Adding customer and product attributes to event data. In order to model Web log events using
+attributes from other databases, any customer ID, product number, and purchase order number
+associated with each event must be correctly identified and the corresponding attributes merged to the
+processed Web logs. Note that the merged file replicates customer and product information every time
+a customer or product is associated with an event.
+• Adding purchase and Web log information to customer data. In order to model the value of a
+customer, their purchases and session information must be picked out of the appropriate databases,
+totaled, and merged with the customer database. This involves the creation of new attributes as
+discussed in the constructing data process.
+After integrating databases, the e-retailer goes through an exploration process to make sure that the data
+merge was performed correctly.
+Integration Tasks
+Integrating data can become complex if you have not spent adequate time developing an understanding
+of your data. Give some thought to items and attributes that seem most relevant to the data mining goals
+and then get started integrating your data.
+Task List
+• Using Merge or Append nodes in IBM SPSS Modeler, integrate the data sets considered useful for
+modeling.
+• Consider saving the resulting output before proceeding to modeling.
+• After merging, data can be simplified by aggregating values. Aggregation means that new values are
+computed by summarizing information from multiple records and/or tables.
+• You may also need to generate new records (such as the average deduction from several years of
+combined tax returns).
+Formatting Data
+As a final step before model building, it is helpful to check whether certain techniques require a particular
+format or order to the data. For example, it is not uncommon that a sequence algorithm requires the data
+to be presorted before running the model. Even if the model can perform the sorting for you, it may save
+processing time to use a Sort node prior to modeling.
+Task List
+Consider the following questions when formatting data:
+• Which models do you plan to use?
+• Do these models require a particular data format or order?
+If changes are recommended, the processing tools in IBM SPSS Modeler can help you apply the
+necessary data manipulation.
+22 IBM SPSS Modeler CRISP-DM Guide
+Ready for modeling?
+Before building models in IBM SPSS Modeler, be sure you have answered the following questions.
+• Are all the data accessible from within IBM SPSS Modeler?
+• Based upon your initial exploration and understanding, were you able to select relevant subsets of data?
+• Have you cleaned the data effectively or removed unsalvageable items? Document any decisions in the
+final report.
+• Are multiple data sets integrated properly? Were there any merging problems that should be
+documented?
+• Have you researched the requirements of the modeling tools that you plan to use?
+• Are there any formatting issues you can address before modeling? This includes both required
+formatting concerns as well as tasks that may reduce modeling time.
+If you can answer the above questions, then you're ready for the crux of data mining--modeling.

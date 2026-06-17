@@ -1,0 +1,42 @@
+# QUY TRÌNH DATA SCIENCE CHUẨN THỰC TẾ (END-TO-END WORKFLOW)
+---
+
+## Giai đoạn 1: Business Understanding (Hiểu bài toán & Định hướng)
+*Mục tiêu: Xác định rõ mục đích kinh doanh, đầu ra của dự án và cách phân phối giải pháp trước khi viết dòng code đầu tiên.*
+
+* **1.1. Khảo sát bối cảnh nghiệp vụ:** Ai là người đưa ra yêu cầu? Tại sao họ cần hệ thống này? Nếu có mô hình này thì quy trình vận hành hiện tại của họ sẽ thay đổi như thế nào?
+* **1.2. Xác định mục tiêu kinh doanh:** Định nghĩa rõ "thành công" bằng các chỉ số đo lường được (Ví dụ: Giảm tỷ lệ khách hàng rời bỏ xuống dưới 5%, tối ưu hóa chi phí vận chuyển...).
+* **1.3. Định hình giải pháp kỹ thuật:**
+    * Xác định dạng bài toán (Phân lớp, Dự báo chuỗi thời gian, Phân cụm...).
+    * Độ chi tiết dữ liệu đầu ra là gì? (Dự báo theo ngày, theo tuần, hay theo từng ID khách hàng?).
+    * **Lên phương án triển khai trước (Deployment Plan):** Đầu ra của mô hình sẽ được tích hợp vào đâu? (Dashboard Tableau/PowerBI, Web API, hay gửi qua Telegram Bot?).
+    * *Lưu ý:* Tuyệt đối chưa chọn các thuật toán cụ thể (như SVM, XGBoost) ở bước này.
+
+---
+
+## Giai đoạn 2: Data Understanding (Hiểu dữ liệu & Sinh giả thuyết)
+*Mục tiêu: Đặt ra các hướng đi thông minh thông qua giả thuyết nghiệp vụ thay vì dò dẫm dữ liệu một cách mù quáng.*
+
+* **2.1. Thu thập và mô tả dữ liệu gốc (Data Description):** Kiểm tra kích thước (số dòng/cột), kiểu dữ liệu từng cột (Numerical, Categorical, Datetime) và định nghĩa của từng biến.
+* **2.2. Sinh giả thuyết kinh doanh (Hypothesis Generation):**
+    * Sử dụng Sơ đồ tư duy (Mindmap) hoặc Brainstorm đặt ra các giả thuyết: *"Yếu tố X có ảnh hưởng đến Target như thế nào?"*.
+    * *Lý do:* Bước này giúp bạn chủ động dùng dữ liệu để tìm câu trả lời, thay vì vẽ biểu đồ vô định.
+* **2.3. Tạo đặc trưng sơ bộ (Feature Engineering cho EDA):** Nếu giả thuyết cần các biến liên quan đến thời gian, khoảng cách hoặc tỷ lệ chưa có sẵn, hãy lập trình tạo ra chúng ngay để phục vụ bước EDA.
+* **2.4. Lọc dữ liệu rác (Data Filtering):** Loại bỏ ngay các hàng/cột không mang giá trị kinh doanh hoặc gây nhiễu nặng trước khi vẽ biểu đồ (Ví dụ: Loại bỏ những ngày cửa hàng đóng cửa có `sales = 0`).
+* **2.5. Phân tích dữ liệu thăm dò (EDA):**
+    * *Đơn biến:* Xem phân phối của biến Target (kiểm tra độ lệch skewness, độ nhọn kurtosis).
+    * *Song biến:* Dùng biểu đồ (Scatter, Bar, Boxplot) để **chứng minh hoặc bác bỏ** từng giả thuyết ở bước 2.2. Hướng đi nào ĐÚNG, hướng đi nào SAI?
+    * *Đa biến:* Kiểm tra độ tương quan (Pearson cho biến số, Cramér's V cho biến phân loại) để phát hiện đa cộng tuyến.
+
+---
+
+## Giai đoạn 3: Data Preparation (Chuẩn bị dữ liệu)
+*Mục tiêu: Xử lý kỹ thuật để biến dữ liệu thô thành cấu trúc tối ưu mà mô hình Machine Learning có thể tiếp thu tốt nhất.*
+
+* **3.1. Làm sạch dữ liệu chuyên sâu:** Xử lý dữ liệu thiếu (Null/NaN) dựa trên logic nghiệp vụ; xử lý các điểm dị biệt (Outliers) bằng cách loại bỏ hoặc cắt ngưỡng (Capping/Winsorization).
+* **3.2. Biến đổi dữ liệu (Data Transformation):**
+    * *Rescaling:* Dùng `MinMaxScaler` hoặc `RobustScaler` (nếu biến còn outlier) đưa các biến số về cùng thang đo.
+    * *Encoding:* Chuyển biến định tính thành số (`One-Hot Encoding`, `Label Encoding`, `Target Encoding`).
+    * *Biến đổi tuần hoàn:* Với dữ liệu thời gian có tính chu kỳ (thứ, ngày, tháng), áp dụng hàm Sin/Cos để mô hình hiểu được tính lặp lại liên tục.
+    * *Biến đổi Target:* Nếu Target bị lệch nặng, áp dụng Log-transform để đưa về phân phối chuẩn (Gaussian).
+* **3.3. Lựa chọn đặc trưng (Feature Selection):** Kết hợp kết quả đánh giá từ bước EDA và các thuật toán chọn lọc tự động (như **

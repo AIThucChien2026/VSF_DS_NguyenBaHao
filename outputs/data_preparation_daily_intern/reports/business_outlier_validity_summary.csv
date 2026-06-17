@@ -1,0 +1,10 @@
+context_check,business_validity,rows
+unit_price,likely_valid_premium_product_high_cogs,42
+unit_price,possible_error_price_below_cogs,8
+discount,review_discount_context,34
+discount,likely_valid_campaign_discount,16
+refund,likely_valid_full_or_near_full_refund,46
+refund,likely_valid_high_value_item_refund,4
+daily_target,likely_valid_high_volume_day,317
+daily_target,review_negative_margin_day,16
+daily_target,likely_valid_high_cost_high_sales_day,1

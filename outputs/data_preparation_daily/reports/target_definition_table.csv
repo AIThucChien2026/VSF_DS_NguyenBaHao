@@ -1,0 +1,3 @@
+target_column,source_table,grain,problem_type,missing_count,status
+Revenue,sales,daily,regression,0,ready
+COGS,sales,daily,regression,0,ready

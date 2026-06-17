@@ -1,0 +1,166 @@
+feature_name,source_group,leakage_risk,default_action,reason
+Revenue,sales,target,exclude_from_X,Target column
+COGS,sales,target,exclude_from_X,Target column
+day_of_week,calendar,low,include,Known before prediction
+month,calendar,low,include,Known before prediction
+quarter,calendar,low,include,Known before prediction
+year,calendar,low,include,Known before prediction
+is_weekend,calendar,low,include,Known before prediction
+Revenue_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+Revenue_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+Revenue_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+Revenue_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+COGS_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+COGS_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+COGS_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+COGS_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+sessions_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+sessions_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+sessions_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+sessions_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+unique_visitors_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+unique_visitors_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+unique_visitors_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+unique_visitors_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+page_views_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+page_views_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+page_views_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+page_views_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_bounce_rate_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_bounce_rate_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_bounce_rate_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_bounce_rate_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_session_duration_sec_mean_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_session_duration_sec_mean_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_session_duration_sec_mean_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+avg_session_duration_sec_mean_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+traffic_source_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+traffic_source_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+traffic_source_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+traffic_source_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_order_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_order_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_order_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_order_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_customer_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_customer_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_customer_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_customer_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_source_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_source_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_source_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_source_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_cancelled_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_cancelled_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_cancelled_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_cancelled_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_created_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_created_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_created_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_created_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_delivered_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_delivered_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_delivered_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_delivered_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_paid_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_paid_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_paid_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_paid_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_returned_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_returned_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_returned_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_returned_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_shipped_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_shipped_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_shipped_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+order_status_shipped_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_total_quantity_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_total_quantity_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_total_quantity_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_total_quantity_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_gross_item_revenue_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_gross_item_revenue_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_gross_item_revenue_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_gross_item_revenue_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_discount_amount_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_discount_amount_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_discount_amount_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_discount_amount_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_estimated_cogs_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_estimated_cogs_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_estimated_cogs_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_estimated_cogs_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_distinct_products_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_distinct_products_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_distinct_products_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_distinct_products_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_quantity_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_quantity_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_quantity_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_return_quantity_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_refund_amount_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_refund_amount_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_refund_amount_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_refund_amount_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stock_on_hand_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stock_on_hand_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stock_on_hand_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stock_on_hand_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_received_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_received_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_received_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_received_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_sold_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_sold_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_sold_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_units_sold_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stockout_days_sum_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stockout_days_sum_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stockout_days_sum_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_stockout_days_sum_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_days_of_supply_mean_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_days_of_supply_mean_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_days_of_supply_mean_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_days_of_supply_mean_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_fill_rate_mean_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_fill_rate_mean_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_fill_rate_mean_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_fill_rate_mean_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_inventory_product_count_lag_1d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_inventory_product_count_lag_7d,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_inventory_product_count_rolling_7d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+daily_inventory_product_count_rolling_28d_mean,lagged_or_rolling,low,include,Uses only shifted historical values
+sessions_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+unique_visitors_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+page_views_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+avg_bounce_rate,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+avg_session_duration_sec_mean,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+traffic_source_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_order_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_customer_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_source_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_status_cancelled_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_status_created_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_status_delivered_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_status_paid_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_status_returned_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+order_status_shipped_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_total_quantity,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_gross_item_revenue,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_discount_amount,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_estimated_cogs,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_distinct_products,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_return_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_return_quantity,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_refund_amount,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_stock_on_hand_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_units_received_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_units_sold_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_stockout_days_sum,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_days_of_supply_mean,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_fill_rate_mean,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time
+daily_inventory_product_count,same_day_realized,medium/high,exclude_by_default,May not be known at prediction time

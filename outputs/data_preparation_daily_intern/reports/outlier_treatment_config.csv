@@ -1,0 +1,6 @@
+config,value,note
+APPLY_OUTLIER_TREATMENT_TO_X,False,"False = chỉ phân tích, không thay đổi X"
+WINSOR_LOWER_Q,0.01,Ngưỡng dưới cho winsorize thử nghiệm
+WINSOR_UPPER_Q,0.99,Ngưỡng trên cho winsorize thử nghiệm
+target_policy,do_not_cap_target_by_default,Target nên giữ raw; cân nhắc log-transform ở modeling
+feature_policy,cap_only_if_needed_for_linear_model,Tree/boosting thường chịu outlier tốt hơn linear model

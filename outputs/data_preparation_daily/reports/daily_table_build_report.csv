@@ -1,0 +1,7 @@
+output_table,source_tables,date_key,rows,unique_dates,duplicate_dates,status
+daily_level_base,sales,Date,3833,3833,0,pass
+traffic_daily_features,traffic,Date,3652,3652,0,pass
+orders_daily_features,orders,Date,3833,3833,0,pass
+items_daily_features,items,Date,3833,3833,0,pass
+returns_daily_features,returns,Date,3806,3806,0,pass
+inventory_daily_features,inventory,Date,126,126,0,pass

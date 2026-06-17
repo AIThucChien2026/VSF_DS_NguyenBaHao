@@ -1,0 +1,30 @@
+check_name,table_name,checked_column,status,issue_count,action
+required_columns,sales,"Date, Revenue, COGS",pass,0,
+required_columns,sample_submission,Date,pass,0,
+required_columns,web_traffic,date,pass,0,
+required_columns,orders,"order_id, order_date",pass,0,
+required_columns,order_items,"order_id, product_id, quantity, unit_price",pass,0,
+required_columns,products,"product_id, cogs",pass,0,
+required_columns,returns,return_date,pass,0,
+required_columns,inventory,"snapshot_date, product_id",pass,0,
+duplicate_daily_key,sales,Date,pass,0,Aggregate by date if needed
+duplicate_daily_key,sample_submission,Date,pass,0,Aggregate by date if needed
+numeric_convertible,sales,Revenue,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,sales,COGS,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,web_traffic,sessions,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,web_traffic,unique_visitors,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,web_traffic,page_views,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,web_traffic,bounce_rate,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,web_traffic,avg_session_duration_sec,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,order_items,quantity,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,order_items,unit_price,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,order_items,discount_amount,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,products,cogs,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,returns,return_quantity,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,returns,refund_amount,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,inventory,stock_on_hand,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,inventory,units_received,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,inventory,units_sold,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,inventory,stockout_days,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,inventory,days_of_supply,pass,0,Coerce invalid values to NaN and log
+numeric_convertible,inventory,fill_rate,pass,0,Coerce invalid values to NaN and log

@@ -1,0 +1,15 @@
+﻿table,keys,total_rows,key_duplicates,key_dup_pct
+order_items,"order_id, product_id",714669,16,0.002
+customers,customer_id,121930,0,0.0
+geography,zip,39948,0,0.0
+inventory,"snapshot_date, product_id",60247,0,0.0
+orders,order_id,646945,0,0.0
+payments,order_id,646945,0,0.0
+products,product_id,2412,0,0.0
+promotions,promo_id,50,0,0.0
+returns,return_id,39939,0,0.0
+reviews,review_id,113551,0,0.0
+sales,Date,3833,0,0.0
+sample_submission,Date,548,0,0.0
+shipments,order_id,566067,0,0.0
+web_traffic,"date, traffic_source",3652,0,0.0

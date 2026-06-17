@@ -1,0 +1,6 @@
+join_step,rows_before,rows_after,unmatched_left_count,status
+traffic_daily_features,3833,3833,181,pass
+orders_daily_features,3833,3833,0,pass
+items_daily_features,3833,3833,0,pass
+returns_daily_features,3833,3833,27,pass
+inventory_daily_features,3833,3833,3707,pass

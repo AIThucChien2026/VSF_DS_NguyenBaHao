@@ -1,0 +1,51 @@
+order_id,order_date,product_id,product_name,category,quantity,unit_price,gross_line_value,discount_amount,discount_rate,business_validity,check_reason
+696254,2019-12-20,296,LotusWear UE-17,Streetwear,8,22022.17,176177.36,35235.47,0.19999998864780358,review_discount_context,Discount cao cần xem promo/category/order context
+830939,2022-12-01,462,SaigonFlex UM-67,Streetwear,8,19549.76,156398.08,31279.62,0.20000002557576155,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+784754,2021-11-29,476,SaigonFlex UM-81,Streetwear,8,19119.88,152959.04,30591.81,0.20000001307539586,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+832287,2022-12-13,505,SaigonFlex UM-10,Streetwear,8,19082.07,152656.56,30531.31,0.19999998689869602,review_discount_context,Discount cao cần xem promo/category/order context
+631538,2018-09-24,347,LotusWear UE-68,Streetwear,8,37765.51,302124.08,30212.41,0.10000000661979673,review_discount_context,Discount cao cần xem promo/category/order context
+629691,2018-09-14,347,LotusWear UE-68,Streetwear,8,37382.53,299060.24,29906.02,0.0999999866247683,review_discount_context,Discount cao cần xem promo/category/order context
+742279,2020-12-25,405,SaigonFlex UM-10,Streetwear,8,18593.34,148746.72,29749.34,0.19999997310865072,review_discount_context,Discount cao cần xem promo/category/order context
+742389,2020-12-29,405,SaigonFlex UM-10,Streetwear,8,18590.15,148721.2,29744.24,0.19999999999999998,review_discount_context,Discount cao cần xem promo/category/order context
+740137,2020-11-28,405,SaigonFlex UM-10,Streetwear,8,18536.52,148292.16,29658.43,0.19999998651311032,review_discount_context,Discount cao cần xem promo/category/order context
+833634,2022-12-26,462,SaigonFlex UM-67,Streetwear,8,18491.16,147929.28,29585.86,0.20000002703994774,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+607081,2018-06-27,334,LotusWear UE-55,Streetwear,8,20516.66,164133.28,29543.99,0.17999999756295618,review_discount_context,Discount cao cần xem promo/category/order context
+643830,2018-12-27,436,SaigonFlex UM-41,Streetwear,8,18325.27,146602.16,29320.43,0.1999999863576362,review_discount_context,Discount cao cần xem promo/category/order context
+549011,2017-11-30,436,SaigonFlex UM-41,Streetwear,8,18318.69,146549.52,29309.9,0.19999997270547187,review_discount_context,Discount cao cần xem promo/category/order context
+640216,2018-11-26,404,SaigonFlex UM-09,Streetwear,8,18149.21,145193.68,29038.74,0.20000002754940852,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+608849,2018-07-01,334,LotusWear UE-55,Streetwear,8,20085.36,160682.88,28922.92,0.18000000995750137,review_discount_context,Discount cao cần xem promo/category/order context
+548459,2017-11-29,436,SaigonFlex UM-41,Streetwear,8,18064.3,144514.4,28902.88,0.2,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+639347,2018-11-24,404,SaigonFlex UM-09,Streetwear,8,17895.07,143160.56,28632.11,0.19999998602967187,review_discount_context,Discount cao cần xem promo/category/order context
+742757,2020-12-30,429,SaigonFlex UM-34,Streetwear,8,17885.14,143081.12,28616.22,0.19999997204383083,review_discount_context,Discount cao cần xem promo/category/order context
+741660,2020-12-22,429,SaigonFlex UM-34,Streetwear,8,17853.02,142824.16,28564.83,0.19999998599676694,review_discount_context,Discount cao cần xem promo/category/order context
+551533,2017-12-17,436,SaigonFlex UM-41,Streetwear,8,17691.81,141534.48,28306.9,0.20000002826166458,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+547052,2017-11-24,436,SaigonFlex UM-41,Streetwear,8,17647.96,141183.68,28236.74,0.20000002833188654,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+639887,2018-11-25,404,SaigonFlex UM-09,Streetwear,8,17624.64,140997.12,28199.42,0.19999997163062622,review_discount_context,Discount cao cần xem promo/category/order context
+550745,2017-12-17,436,SaigonFlex UM-41,Streetwear,8,17561.81,140494.48,28098.9,0.20000002847086945,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+787441,2021-12-28,476,SaigonFlex UM-81,Streetwear,7,19803.24,138622.68000000002,27724.54,0.20000002885530704,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+830456,2022-11-21,421,SaigonFlex UM-26,Streetwear,8,17308.69,138469.52,27693.9,0.19999997111277631,review_discount_context,Discount cao cần xem promo/category/order context
+768508,2021-06-28,405,SaigonFlex UM-10,Streetwear,8,18912.28,151298.24,27233.68,0.17999997884972094,review_discount_context,Discount cao cần xem promo/category/order context
+786083,2021-12-17,450,SaigonFlex UM-55,Streetwear,8,16740.68,133925.44,26785.09,0.2000000149336825,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+831562,2022-12-09,421,SaigonFlex UM-26,Streetwear,8,16715.8,133726.4,26745.28,0.2,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+787000,2021-12-25,450,SaigonFlex UM-55,Streetwear,8,16711.72,133693.76,26738.75,0.19999998504043867,review_discount_context,Discount cao cần xem promo/category/order context
+677218,2019-07-16,404,SaigonFlex UM-09,Streetwear,8,18566.21,148529.68,26735.34,0.17999998384161334,review_discount_context,Discount cao cần xem promo/category/order context
+784841,2021-11-28,476,SaigonFlex UM-81,Streetwear,7,19067.98,133475.86,26695.17,0.19999998501601712,review_discount_context,Discount cao cần xem promo/category/order context
+455176,2016-12-29,503,SaigonFlex UM-08,Streetwear,8,16682.92,133463.36,26692.67,0.19999998501461375,review_discount_context,Discount cao cần xem promo/category/order context
+551382,2017-12-18,436,SaigonFlex UM-41,Streetwear,7,19016.54,133115.78,26623.16,0.2000000300490295,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+697586,2019-12-27,405,SaigonFlex UM-10,Streetwear,7,18943.21,132602.47,26520.49,0.1999999698346494,review_discount_context,Discount cao cần xem promo/category/order context
+832091,2022-12-16,505,SaigonFlex UM-10,Streetwear,7,18897.63,132283.41,26456.68,0.19999998488094614,review_discount_context,Discount cao cần xem promo/category/order context
+614492,2018-07-17,504,SaigonFlex UM-09,Streetwear,8,18366.41,146931.28,26447.63,0.1799999972776389,review_discount_context,Discount cao cần xem promo/category/order context
+784992,2021-12-02,450,SaigonFlex UM-55,Streetwear,8,16525.25,132202.0,26440.4,0.2,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+741645,2020-12-21,424,SaigonFlex UM-29,Streetwear,8,16444.56,131556.48,26311.3,0.20000003040519174,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+641780,2018-12-14,412,SaigonFlex UM-17,Streetwear,8,16406.59,131252.72,26250.54,0.1999999695244411,review_discount_context,Discount cao cần xem promo/category/order context
+831605,2022-12-09,505,SaigonFlex UM-10,Streetwear,7,18728.2,131097.4,26219.48,0.2,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"
+548839,2017-12-02,436,SaigonFlex UM-41,Streetwear,7,18698.03,130886.20999999999,26177.24,0.19999998471955147,review_discount_context,Discount cao cần xem promo/category/order context
+693845,2019-11-24,405,SaigonFlex UM-10,Streetwear,7,18697.48,130882.36,26176.47,0.19999998471910196,review_discount_context,Discount cao cần xem promo/category/order context
+815614,2022-07-07,334,LotusWear UE-55,Streetwear,7,20754.31,145280.17,26150.43,0.17999999587004886,review_discount_context,Discount cao cần xem promo/category/order context
+675396,2019-07-03,334,LotusWear UE-55,Streetwear,7,20743.89,145207.22999999998,26137.3,0.1799999903586068,review_discount_context,Discount cao cần xem promo/category/order context
+830266,2022-11-18,511,SaigonFlex UM-16,Streetwear,8,16325.1,130600.8,26120.16,0.19999999999999998,review_discount_context,Discount cao cần xem promo/category/order context
+785858,2021-12-12,407,SaigonFlex UM-12,Streetwear,8,16237.44,129899.52,25979.9,0.19999996920696858,review_discount_context,Discount cao cần xem promo/category/order context
+831205,2022-11-29,407,SaigonFlex UM-12,Streetwear,8,16230.84,129846.72,25969.34,0.19999996919444712,review_discount_context,Discount cao cần xem promo/category/order context
+787668,2021-12-29,407,SaigonFlex UM-12,Streetwear,8,16222.69,129781.52,25956.3,0.19999996917897092,review_discount_context,Discount cao cần xem promo/category/order context
+743040,2020-12-30,424,SaigonFlex UM-29,Streetwear,8,16220.27,129762.16,25952.43,0.19999998458718626,review_discount_context,Discount cao cần xem promo/category/order context
+696809,2019-12-25,405,SaigonFlex UM-10,Streetwear,7,18522.92,129660.43999999999,25932.09,0.20000001542490525,likely_valid_campaign_discount,"Discount cao nhưng vẫn nằm trong gross line value, có thể là campaign"

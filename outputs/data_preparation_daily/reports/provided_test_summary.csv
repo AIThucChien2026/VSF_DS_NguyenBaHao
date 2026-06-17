@@ -1,0 +1,2 @@
+rows,date_min,date_max,overlaps_train_valid_dates,has_revenue,has_cogs,note
+548,2023-01-01,2024-07-01,0,True,True,provided external test/holdout table; not created from historical split

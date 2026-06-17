@@ -1,0 +1,9 @@
+feature_table,rows,unique_dates,duplicate_dates
+traffic,3652,3652,0
+orders,3833,3833,0
+items,3833,3833,0
+returns,3806,3806,0
+inventory,3833,3833,0
+promotions,3833,3833,0
+reviews,3825,3825,0
+customers,3941,3941,0
