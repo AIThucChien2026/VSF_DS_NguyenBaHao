@@ -1,0 +1,2 @@
+pr_auc,roc_auc,precision,recall,f1,balanced_accuracy,threshold,model,train_rows,test_rows,threshold_policy
+0.0849216817704962,0.5485191533861217,0.11512811512811513,0.23567451050835278,0.1546896185816188,0.5527607173982689,0.06335713951173381,LightGBM Tuned,469813,83045,locked from validation max F1

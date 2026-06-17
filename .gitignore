@@ -1,0 +1,20 @@
+# môi trường
+venv/
+.venv/
+
+# cache
+__pycache__/
+.cache/
+tmp/
+
+# data
+data/
+
+# models
+models/
+
+# outputs ở mọi cấp thư mục
+**/check_quality_outputs/
+**/eda_outputs/
+**/fe_outputs/
+**/modeling_outputs/

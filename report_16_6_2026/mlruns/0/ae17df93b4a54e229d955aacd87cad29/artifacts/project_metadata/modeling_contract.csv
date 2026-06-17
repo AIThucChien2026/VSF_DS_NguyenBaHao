@@ -1,0 +1,12 @@
+item,value
+problem_type,binary_classification
+grain,one row per order_id
+prediction_time,order placement
+target,returned_label
+positive_class,returned = 1
+label_source,orders.order_status
+feature_availability,available at or before order_date
+primary_metric,PR-AUC / average_precision
+main_feature_count,28
+fe_readiness_passed,True
+test_policy,use once after champion is locked

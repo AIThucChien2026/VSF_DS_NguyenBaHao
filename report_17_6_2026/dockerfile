@@ -1,0 +1,14 @@
+# lấy base image MLflow làm gốc
+FROM ghcr.io/mlflow/mlflow:v3.11.1-full
+# Tạo thư mục và chuyển thư mục đó vào container của base image
+WORKDIR /app
+# copy file requirements.txt từ host vào trong container
+COPY requirements.txt .
+# Cài đặt thư viện hệ thống cần thiết cho LightGBM (OpenMP)
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libgomp1 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Cài đặt thư viện python
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt

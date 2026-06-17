@@ -1,0 +1,23 @@
+{
+  "orders": [
+    {
+      "order_id": 100001,
+      "order_date": "2026-06-16",
+      "first_order_date": "2025-12-01",
+      "payment_method": "cod",
+      "device_type": "mobile",
+      "order_source": "paid_search",
+      "age_group": "25-34",
+      "gender": "Female",
+      "payment_value": 71163.75,
+      "items": [
+        {
+          "product_id": 609,
+          "quantity": 7,
+          "unit_price": 10166.25,
+          "discount_amount": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+phase1:
+-Kết luận ghi "merge vào order_items" nhưng thực tế merge vào df_master — cần sửa diễn đạt.
+Thiếu audit shape trước/sau drop NaN label trongode có in ra nhưng kết luận không phản ánh.
+
+phase 2:
+Kết luận phản ánh đúng: Boxplot không phân tách rõ, category return rate gần baseline ~6.5%.
+Đề xuất bổ sung:
+Thiếu thống kê discount_amount và quantity ở bivariate — Phase 2 chỉ vẽ 2 biến số liên tục.
+phase 3: 
+- GT1: thiếu tỷ lệ trả hàng trước đó của khách ( cực kỳ cần)
+phase 4;
+Đề xuất bổ sung feature:
+Thiếu product_price_tier (cao cấp/trung/thấp) — sản phẩm cao cấp có thể có pattern khác.
+Thiếu product_age_days (sản phẩm mới vs lâu đời) — SKU mới thường chưa có đủ feedback.
+phase 4 + 1 = :
+Đề xuất bổ sung feature:
+Thiếu customer_cod_ratio: tỷ lệ lịch sử dùng COD của khách — có giá trị dự báo cao hơn cờ đơn lẻ.
+Thiếu is_first_cod_order: lần đầu dùng COD thường rủi ro hơn.
+phase 6:
+Đề xuất bổ sung feature:
+Thiếu discount_ratio = discount_amount / unit_price — phản ánh mức độ giảm giá tương đối tốt hơn giá trị tuyệt đối.
+Thiếu price_vs_category_avg: giá sản phẩm so với trung bình ngành — đắt hơn thông thường có thể tăng kỳ vọng và trả hàng.
+phas7:
+Thiếu days_since_last_order: khoảng cách đơn hàng liên tiếp — mua lại nhanh có thể là dấu hiệu trả đổi.
+Thiếu order_hour: giờ đặt hàng — đặt hàng lúc nửa đêm có thể là mua bốc đồng.

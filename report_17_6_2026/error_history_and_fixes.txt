@@ -1,0 +1,86 @@
+================================================================================
+BẢNG TỔNG HỢP VÀ PHÂN TÍCH CÁC LỖI GẶP PHẢI TRONG QUÁ TRÌNH SETUP MLFLOW DOCKER
+================================================================================
+
+Dưới đây là chi tiết các lỗi bạn đã gặp phải trước và sau khi sửa lỗi, kèm theo nguyên nhân và giải thích chi tiết để học hỏi và rút kinh nghiệm:
+
+--------------------------------------------------------------------------------
+LỖI 1: Lỗi cú pháp mảng trong file YAML
+--------------------------------------------------------------------------------
+* Thông báo lỗi: 
+  "validating docker-compose.yml: services.mlflow.ports must be a array"
+* Vị trí: docker-compose.yml (phần `ports` và `volumes`)
+* Nguyên nhân: 
+  Trong định dạng YAML, các mục của danh sách (mảng/array) bắt đầu bằng dấu gạch ngang (`-`). Bạn viết liền tù tì không có dấu cách:
+  - `-"5000:5000"`
+  - `-mlflow_data:/mlflow`
+  YAML sẽ hiểu đây là một chuỗi ký tự thông thường chứ không phải là một phần tử trong mảng.
+* Giải pháp:
+  Thêm dấu cách sau dấu gạch ngang (`-`):
+  - `- "5000:5000"`
+  - `- mlflow_data:/mlflow`
+
+--------------------------------------------------------------------------------
+LỖI 2: Sai chính tả tên file copy trong Dockerfile
+--------------------------------------------------------------------------------
+* Thông báo lỗi:
+  "COPY requirements.rxt .: "/requirements.rxt": not found"
+* Vị trí: dockerfile (dòng lệnh COPY)
+* Nguyên nhân:
+  - Viết sai chính tả đuôi mở rộng của file requirements từ `.txt` thành `.rxt`.
+  - Đồng thời trong thư mục chưa tạo sẵn file `requirements.txt`.
+* Giải pháp:
+  - Tạo mới file `requirements.txt` chứa các thư viện Python cần thiết (`pandas`, `joblib`, `scikit-learn`, `mlflow`, `protobuf`).
+  - Sửa lại lệnh trong dockerfile thành `COPY requirements.txt .`.
+
+--------------------------------------------------------------------------------
+LỖI 3: Trùng tên Container đang chạy hoặc đang dừng (Name Conflict)
+--------------------------------------------------------------------------------
+* Thông báo lỗi:
+  "Conflict. The container name "/mlflow_server" is already in use by container..."
+* Vị trí: Môi trường chạy Docker (Docker daemon)
+* Nguyên nhân:
+  Đã tồn tại một container cũ mang tên `mlflow_server` đang chạy ngầm hoặc ở trạng thái Stop. Docker không cho phép hai container chạy song song có cùng một tên định danh.
+* Giải pháp:
+  Chạy lệnh tắt và xóa container cũ bằng Terminal:
+  `docker rm -f mlflow_server`
+
+--------------------------------------------------------------------------------
+LỖI 4: Sai câu lệnh chạy service (Executable Not Found)
+--------------------------------------------------------------------------------
+* Thông báo lỗi:
+  "runc create failed... exec: "mlflow_server": executable file not found in $PATH"
+* Vị trí: docker-compose.yml (phần `command` của service `mlflow_server`)
+* Nguyên nhân:
+  Bạn cấu hình câu lệnh chạy server là `mlflow_server --host...`
+  Tuy nhiên, trong container không có chương trình nào tên là `mlflow_server`. Tên đúng của CLI MLflow là `mlflow` và lệnh con là `server`.
+* Giải pháp:
+  Sửa câu lệnh chạy thành: `mlflow server --host 0.0.0.0 --port 5000 ...`
+
+--------------------------------------------------------------------------------
+LỖI 5: Bảo mật chặn DNS Rebinding (Invalid Host header)
+--------------------------------------------------------------------------------
+* Thông báo lỗi:
+  "mlflow.exceptions.MlflowException: API request failed... Response body: 'Invalid Host header - possible DNS rebinding attack detected'"
+* Vị trí: Giao tiếp mạng nội bộ giữa 2 container
+* Nguyên nhân:
+  Từ MLflow phiên bản 3.5.0+, server tích hợp cơ chế bảo mật chặn các request gửi tới hostname lạ để chống tấn công DNS Rebinding. Do `python_runner` gọi qua hostname `mlflow_server` nên bị MLflow block.
+* Giải pháp:
+  Thêm cờ `--allowed-hosts "*"` vào cuối lệnh chạy server MLflow ở `docker-compose.yml` để cho phép các container trong mạng nội bộ truy cập được.
+
+--------------------------------------------------------------------------------
+LỖI 6: Sai đường dẫn mount thư mục (No such file or directory)
+--------------------------------------------------------------------------------
+* Thông báo lỗi:
+  "python: can't open file '/app/report_17_6_2026/track_from_csv.py': [Errno 2] No such file or directory"
+  và tiếp theo đó:
+  "Error: Không tìm thấy file bảng so sánh tại /report_14_6_2026/modeling_outputs/..."
+* Vị trí: docker-compose.yml (phần `volumes` của `python_runner`)
+* Nguyên nhân:
+  - Khi mount thư mục hiện tại `.` vào `/app` (`- .:/app`), container chỉ nhìn thấy các file trong thư mục `report_17_6_2026`. Nó không thể tìm thấy thư mục `report_14_6_2026` chứa dữ liệu csv và model đã lưu trước đó.
+  - Đồng thời lệnh chạy `python report_17_6_2026/track_from_csv.py` bị lặp lại thư mục vì `/app` chính là `report_17_6_2026`.
+* Giải pháp:
+  - Thay đổi đường dẫn mount volume thành `../:/app` (mount toàn bộ thư mục cha `customer_churn_PL` vào container).
+  - Cấu hình lại câu lệnh chạy chuẩn xác: `python report_17_6_2026/track_from_csv.py`.
+  Nhờ vậy, script chạy từ thư mục gốc có quyền truy cập đầy đủ sang cả 2 thư mục `report_17_6_2026` và `report_14_6_2026`.
+================================================================================

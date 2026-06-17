@@ -1,0 +1,13 @@
+pandas
+joblib
+scikit-learn
+#mlflow>=2.10.0
+protobuf>=3.20.0
+
+lightgbm
+# tạm bỏ các thư mục ra do quá size
+
+/check_quality_outputs
+/eda_outputs
+/fe_outputs
+/modeling_outputs

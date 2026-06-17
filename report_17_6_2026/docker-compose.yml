@@ -1,0 +1,25 @@
+# file này đóng vai trò chạy container
+version: '3.8'
+
+services:
+  # tên service đặt tự ý
+  python_runner:
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: mlfflow_python_runner
+    volumes:
+      - ../:/app
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow_server:5000
+    command: python report_17_6_2026/track_from_csv.py
+  mlflow_server:
+    image: ghcr.io/mlflow/mlflow:v3.11.1-full
+    container_name: mlflow_server
+    ports: 
+      - "5000:5000"
+    volumes: 
+      - mlflow_data:/mlflow
+    command: mlflow server --host 0.0.0.0 --port 5000 --backend-store-uri /mlflow --allowed-hosts "*"
+volumes: 
+  mlflow_data: 

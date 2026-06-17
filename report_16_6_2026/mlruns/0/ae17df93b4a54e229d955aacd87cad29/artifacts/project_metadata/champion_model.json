@@ -1,0 +1,9 @@
+{
+  "model": "LightGBM Tuned",
+  "validation_pr_auc": 0.08237409432611902,
+  "validation_roc_auc": 0.5526260924364821,
+  "mean_fold_pr_auc": 0.08624957411534855,
+  "std_fold_pr_auc": 0.0029147848944147256,
+  "selected_threshold": 0.06335713951173381,
+  "threshold_policy": "max_f1_on_validation"
+}
