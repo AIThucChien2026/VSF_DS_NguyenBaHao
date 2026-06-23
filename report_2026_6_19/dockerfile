@@ -1,0 +1,15 @@
+FROM ghcr.io/mlflow/mlflow:v3.11.1-full
+
+WORKDIR /app
+
+# LightGBM needs OpenMP at runtime.
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends libgomp1 && \
+    rm -rf /var/lib/apt/lists/*
+
+# Keep dependencies in the image so the container can run without local installs.
+COPY requirements.txt /tmp/requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r /tmp/requirements.txt
+
+ENV PYTHONUNBUFFERED=1

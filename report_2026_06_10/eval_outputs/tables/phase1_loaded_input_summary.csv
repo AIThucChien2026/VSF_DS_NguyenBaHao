@@ -1,9 +1,0 @@
-﻿table,file_name,rows,columns,path
-test_predictions,phase10_final_model_test_predictions.csv,384,9,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase10_final_model_test_predictions.csv
-final_model_metrics,phase10_final_model_metrics.csv,4,7,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase10_final_model_metrics.csv
-final_feature_list,phase10_final_feature_list.csv,21,3,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase10_final_feature_list.csv
-final_model_summary,phase10_final_model_summary.csv,19,2,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase10_final_model_summary.csv
-metric_report_table,phase11_metric_report_table.csv,4,10,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase11_metric_report_table.csv
-feature_report_table,phase11_feature_report_table.csv,10,6,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase11_feature_report_table.csv
-model_report_summary,phase11_model_report_summary.csv,22,2,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase11_model_report_summary.csv
-report_conclusion,phase11_report_conclusion.csv,5,2,B:\Dự án VSF\VinuniDatathon\report_8_6_2026\model_outputs\tables\phase11_report_conclusion.csv

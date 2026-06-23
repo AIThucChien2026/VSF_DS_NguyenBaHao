@@ -1,0 +1,107 @@
+version: "3.8"
+
+# ─────────────────────────────────────────────────────────
+#  Thứ tự khởi động:
+#    1. mlflow_server     — tracking server + model registry
+#    2. register_pipeline — build và đẩy Pipeline lên Registry (chạy 1 lần rồi exit)
+#    3. mlflow_serving    — load Pipeline từ Registry, serve /invocations tại port 8001
+#    4. api               — FastAPI, nhận request → clean → gọi mlflow_serving
+# ─────────────────────────────────────────────────────────
+
+services:
+
+  # ── 1. MLflow Tracking Server ────────────────────────────
+  mlflow_server:
+    image: ghcr.io/mlflow/mlflow:v3.11.1-full
+    container_name: mlflow_server
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data:/mlflow
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --default-artifact-root mlflow-artifacts:/
+      --artifacts-destination /mlflow/artifacts
+      --serve-artifacts
+      --allowed-hosts "*"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health').read()"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+
+  # ── 2. Register Pipeline (chạy 1 lần rồi exit) ───────────
+  register_pipeline:
+    build:
+      context: ..
+      dockerfile: report_2026_6_19/dockerfile
+    container_name: register_pipeline
+    depends_on:
+      mlflow_server:
+        condition: service_healthy
+    working_dir: /app/report_2026_6_19
+    volumes:
+      - ../:/app
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow_server:5000
+      PYTHONUNBUFFERED: "1"
+    command: python scripts/register_pipeline.py
+    restart: on-failure
+
+  # ── 3. MLflow Serving ────────────────────────────────────
+  # Dùng MLFLOW_TRACKING_URI để serving download artifact qua HTTP
+  # thay vì đọc file local → tránh lỗi path /tmp/.../MLmodel không tìm thấy
+  mlflow_serving:
+    build:
+      context: ..
+      dockerfile: report_2026_6_19/dockerfile
+    container_name: mlflow_serving
+    ports:
+      - "8001:8001"
+    depends_on:
+      mlflow_server:
+        condition: service_healthy
+    environment:
+      MLFLOW_TRACKING_URI: http://mlflow_server:5000
+      PYTHONUNBUFFERED: "1"
+    command:
+      - bash
+      - -c
+      - |
+        echo 'Chờ Pipeline được register...'
+        until mlflow models serve -m 'models:/customer-return-champion@champion' --host 0.0.0.0 --port 8001 --no-conda; do
+          echo 'Model chưa có trong Registry, thử lại sau 10s...'
+          sleep 10
+        done
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health').read()"]
+      interval: 15s
+      timeout: 10s
+      retries: 20
+      start_period: 30s
+
+  # ── 4. FastAPI App ───────────────────────────────────────
+  api:
+    build:
+      context: ..
+      dockerfile: report_2026_6_19/dockerfile
+    container_name: api
+    ports:
+      - "8000:8000"
+    depends_on:
+      mlflow_serving:
+        condition: service_healthy
+    working_dir: /app/report_2026_6_19
+    volumes:
+      - ../:/app
+    environment:
+      MLFLOW_SERVING_URL: http://mlflow_serving:8001
+      PYTHONUNBUFFERED: "1"
+    command: uvicorn api.app:app --host 0.0.0.0 --port 8000
+
+volumes:
+  mlflow_data:

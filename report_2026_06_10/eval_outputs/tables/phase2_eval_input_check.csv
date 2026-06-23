@@ -1,9 +1,0 @@
-﻿check,status,value,detail,severity
-input_files_exist,PASS,0,missing_files=[],critical
-required_prediction_columns_exist,PASS,0,missing_columns=[],critical
-date_parseable,PASS,0,Số dòng Date không parse được,critical
-no_duplicate_date,PASS,0,Số dòng bị trùng Date,warning
-no_missing_prediction,PASS,0,Số dòng thiếu prediction,critical
-no_negative_prediction,PASS,0,Số dòng prediction âm,warning
-summary_has_test_used_for_tuning,PASS,0,missing_summary_items=[],critical
-test_not_used_for_tuning,PASS,False,Test set chỉ được dùng để đánh giá cuối cùng,critical

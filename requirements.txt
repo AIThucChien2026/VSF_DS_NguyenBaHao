@@ -6,4 +6,7 @@ scipy
 tabulate
 lightgbm
 joblib
+httpx
 scikit-learn
+fastapi
+uvicorn

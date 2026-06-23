@@ -1,0 +1,274 @@
+# Kế Hoạch Xây Dựng SK Pipeline (Inference) Chuẩn Bị cho MLflow
+
+## Bối cảnh & Mục tiêu
+
+Pipeline inference này chuyển dữ liệu thô (5 bảng CSV) thành **dự đoán return probability** bằng model champion LightGBM đã đăng ký trên MLflow. Mọi bước logic phải **mirror chính xác** những gì notebook FE (`3_Feature_Engineering.ipynb`) đã làm — không làm EDA mới, không tạo feature ngoài contract, không train lại model.
+
+---
+
+## Nguồn thông tin lấy từ đâu (từ report 10→14)
+
+### Report 10 – Data Quality Check
+- **6 bảng nguồn**: `orders.csv`, `order_items.csv`, `customers.csv`, `products.csv`, `returns.csv`, `payments.csv`
+- **Bảng được phép từ FE trở đi**: chỉ 5 bảng — `orders`, `order_items`, `customers`, `products`, `payments`. **Không load `returns.csv`**.
+- **Cột bị bỏ hoàn toàn**: `promo_id` (61% missing), `promo_id_2` (99.97% missing).
+- **Duplicate trong `order_items`**: 16 cặp `(order_id, product_id)` trùng → phải aggregate (sum quantity/discount/gross_value) trước khi dùng.
+- **Label**: `returned_label = 1` khi `order_status == "returned"`, `= 0` khi `order_status == "delivered"`.
+
+### Report 11 – EDA
+- Tín hiệu mạnh nhất: `is_cod`, `payment_method`.
+- Tín hiệu hỗ trợ: customer tenure, product descriptors, order value, quantity, discount.
+- **Không dùng bất kỳ dữ liệu nào từ `returns.csv`** (leakage).
+
+### Report 12 – Feature Engineering
+- **5 bảng input**: `orders`, `order_items`, `customers`, `products`, `payments`.
+- **Bước clean bắt buộc**:
+  1. Parse datetime: `orders.order_date`, `customers.signup_date`.
+  2. Drop `promo_id`, `promo_id_2` khỏi `order_items`.
+  3. Tính `line_gross_value = quantity * unit_price` trước khi aggregate.
+  4. Aggregate `order_items` theo `(order_id, product_id)`: sum `quantity`, `discount_amount`, `line_gross_value`.
+- **Feature V1 (28 features)** sau selection funnel:
+  - **Numeric** (impute median → StandardScaler): `customer_tenure_days`, `total_quantity`, `unique_product_count`, `discount_ratio`, `log_payment_value`
+  - **Categorical** (impute most_frequent → OneHotEncoder, handle_unknown='ignore'): `payment_method`, `device_type`, `order_source`, `tenure_group`, `age_group`, `gender`
+  - **Binary** (impute most_frequent → passthrough): `is_cod`, `is_discounted`, + multi-hot product descriptors: `category_Casual`, `category_GenZ`, `category_Outdoor`, `category_Streetwear`, `segment_*` (6 values), `size_L/M/S/XL`
+  - **Derived quantile** (fit inside each fold): `payment_value` → median impute → KBinsDiscretizer(4 quantile bins) → OneHotEncoder
+- **Banned features** (không bao giờ dùng): `mean_product_return_rate`, `max_product_return_rate`, `high_risk_product_count`, `order_status`, `has_return_record`, bất kỳ cột từ `returns.*`.
+- **Preprocessor**: Fit trên outer train, save `preprocessor_v1_outer_train.joblib`.
+
+### Report 14 – Modeling
+- **Champion**: LightGBM Tuned.
+- **Metric chính**: PR-AUC.
+- **Locked threshold**: `0.063357`.
+- **Validation PR-AUC**: 0.082374 | **Test PR-AUC**: 0.084922.
+- Model đã wrapped với `ThresholdedClassifier` và registered trên MLflow registry: `customer-return-champion@champion`.
+
+---
+
+## Vấn đề với code hiện tại (report_2026_06_18)
+
+> [!CAUTION]
+> **`clean_data.py` và `select_features.py` hiện tại đang SAI HOÀN TOÀN** — chúng đang xử lý `sales.csv`/`web_traffic.csv` (project khác), không phải 5 bảng của Datathon. Cần **viết lại từ đầu** theo đúng FE notebook.
+
+---
+
+## Kiến trúc Pipeline SK
+
+```
+data/
+  orders.csv, order_items.csv, customers.csv, products.csv, payments.csv
+              |
+      [clean_data.py]           -> cleaned_df (grain: order-level)
+              |
+  [build_features.py]           -> features_df (28 feature cols V1)
+              |
+  [preprocess_features.py]      -> X_transformed (apply preprocessor_v1.joblib)
+              |
+    [predict_model.py]          -> predictions (probability, label, threshold)
+              |
+       [api/app.py]             -> FastAPI endpoint /predict
+```
+
+---
+
+## Kế Hoạch Chi Tiết
+
+---
+
+### SCRIPT 1: `clean_data.py` — Viết lại
+
+**Nhiệm vụ**: Load đúng 5 bảng, clean theo đúng FE notebook Phase 1+2, trả về DataFrame sạch ở **grain order** có đủ cột để tạo feature.
+
+**Bước thực hiện** (mirror FE Phase 1 + Phase 2):
+
+```
+1. Load 5 bảng:
+   - orders.csv (8 cols), order_items.csv (7 cols, low_memory=False)
+   - customers.csv (7 cols), products.csv (8 cols), payments.csv (4 cols)
+
+2. Parse datetime:
+   - orders["order_date"] = pd.to_datetime(..., errors="coerce")
+   - customers["signup_date"] = pd.to_datetime(..., errors="coerce")
+
+3. Xử lý order_items:
+   a. Drop cột promo_id, promo_id_2 (drop errors="ignore")
+   b. Tính line_gross_value = quantity * unit_price
+   c. Aggregate theo (order_id, product_id):
+      - quantity = sum, discount_amount = sum, line_gross_value = sum
+   d. unit_price_weighted = line_gross_value / quantity (NaN nếu quantity = 0)
+
+4. Merge tất cả về cấp order_id:
+   - Base: orders
+   - Join customers ON customer_id
+   - Join payments ON order_id
+   - Aggregate order_items -> per-order: total_quantity, unique_product_count,
+     total_discount_amount, total_gross_value, discount_ratio, is_discounted
+   - Join products qua order_items -> per-order product descriptors (category, segment, size)
+
+5. Trả về cleaned_df (grain: 1 row / order_id) + clean_summary
+```
+
+**Không cần**: phase check quality riêng, audit figure, report markdown.
+
+---
+
+### SCRIPT 2: `build_features.py` — Viết mới
+
+**Nhiệm vụ**: Từ `cleaned_df` tạo ra đúng feature V1 theo công thức FE notebook Phase 3.
+
+#### A. Payment/Order features
+
+| Feature | Công thức | Nguồn |
+|---|---|---|
+| `is_cod` | `1 if payment_method == "COD" else 0` | `orders.payment_method` |
+| `payment_method` | giữ nguyên string | `orders.payment_method` |
+| `device_type` | giữ nguyên string | `orders.device_type` |
+| `order_source` | giữ nguyên string | `orders.order_source` |
+| `payment_value` | giữ nguyên float | `payments.payment_value` |
+| `log_payment_value` | `np.log1p(payment_value)` | derived |
+
+#### B. Customer features
+
+| Feature | Công thức | Nguồn |
+|---|---|---|
+| `customer_tenure_days` | `(order_date - signup_date).dt.days` | orders + customers |
+| `tenure_group` | pd.cut: <30, 30-180, 180-365, >365 days | derived |
+| `age_group` | giữ nguyên string | `customers.age_group` |
+| `gender` | giữ nguyên string | `customers.gender` |
+
+#### C. Order item aggregate features
+
+| Feature | Công thức | Nguồn |
+|---|---|---|
+| `total_quantity` | sum(quantity) per order | order_items aggregated |
+| `unique_product_count` | count distinct product_id per order | order_items |
+| `discount_ratio` | total_discount / total_gross_value (0 nếu gross=0) | derived |
+| `is_discounted` | `1 if discount_ratio > 0 else 0` | derived |
+
+#### D. Product descriptor multi-hot (per order, V1 only)
+
+| Feature group | Values | Nguồn |
+|---|---|---|
+| `category_*` | Casual, GenZ, Outdoor, Streetwear | products.category join order_items |
+| `segment_*` | Activewear, Balanced, Everyday, Performance, Premium, Standard | products.segment |
+| `size_*` | L, M, S, XL | products.size |
+
+> Multi-hot: nếu order có ít nhất 1 item thuộc value đó → 1, else → 0. Không dùng `color_*` (bị drop ở selection).
+
+**Không tạo**: `payment_value_quantile_bucket`, banned features, calendar features (experimental), `payment_device_interaction` (experimental).
+
+**Leakage gate**: Fail-fast nếu bất kỳ banned feature nào xuất hiện trong output.
+
+---
+
+### SCRIPT 3: `preprocess_features.py` — Viết mới
+
+**Nhiệm vụ**: Load `preprocessor_v1_outer_train.joblib` và transform features_df.
+
+**Preprocessing policy** (mirror FE Phase 5):
+
+```
+Numeric:       customer_tenure_days, total_quantity, unique_product_count,
+               discount_ratio, log_payment_value
+               -> SimpleImputer(median) -> StandardScaler
+
+Categorical:   payment_method, device_type, order_source, tenure_group, age_group, gender
+               -> SimpleImputer(most_frequent) -> OneHotEncoder(handle_unknown="ignore")
+
+Binary:        is_cod, is_discounted, category_* (4), segment_* (6), size_* (4)
+               -> SimpleImputer(most_frequent) -> passthrough
+
+Derived quantile: payment_value
+               -> SimpleImputer(median) -> KBinsDiscretizer(n_bins=4, quantile) -> OneHotEncoder
+               (Fit ONLY on training data — dùng preprocessor đã lưu, KHÔNG fit lại)
+```
+
+> [!IMPORTANT]
+> Khi inference: load `preprocessor_v1_outer_train.joblib` → chỉ gọi `.transform()`, KHÔNG gọi `.fit()` hoặc `.fit_transform()`.
+
+---
+
+### SCRIPT 4: `predict_model.py` — Viết mới
+
+**Nhiệm vụ**: Load model champion và predict.
+
+```python
+LOCKED_THRESHOLD = 0.063357  # Từ report 14, locked trên outer validation
+
+# Load (ưu tiên MLflow registry -> fallback local joblib)
+model = mlflow.pyfunc.load_model("models:/customer-return-champion@champion")
+
+# Predict
+proba = model.predict_proba(X)[:, 1]
+prediction = (proba >= LOCKED_THRESHOLD).astype(int)
+
+# Output
+results = pd.DataFrame({
+    "order_id": order_ids,
+    "return_probability": proba,
+    "prediction": prediction,
+    "threshold": LOCKED_THRESHOLD,
+})
+```
+
+---
+
+### SCRIPT 5: `api/app.py` — FastAPI orchestrator
+
+**Endpoints**:
+
+| Endpoint | Method | Mô tả |
+|---|---|---|
+| `/health` | GET | model_loaded, feature_count, threshold |
+| `/model-info` | GET | model source, threshold, feature list |
+| `/clean` | POST | nhận `data_dir`, trả cleaned rows + summary |
+| `/features` | POST | nhận `data_dir`, trả features + schema |
+| `/predict` | POST | full pipeline: clean → features → preprocess → predict |
+
+---
+
+## Cấu trúc thư mục đề xuất
+
+```
+report_2026_06_18/
+  plan.md
+  scripts/
+    __init__.py
+    clean_data.py               <- VIẾT LẠI (bỏ logic sales.csv)
+    build_features.py           <- VIẾT MỚI (thay select_features.py)
+    preprocess_features.py      <- VIẾT MỚI
+    predict_model.py            <- VIẾT MỚI
+  api/
+    __init__.py
+    app.py                      <- VIẾT MỚI
+    sample_request.json
+    README_API.md
+  outputs/
+    cleaned_sample.csv
+    features_sample.csv
+    prediction_sample.csv
+```
+
+---
+
+## Checklist thực hiện
+
+- [ ] Viết lại `scripts/clean_data.py` (load 5 bảng đúng, merge, aggregate items)
+- [ ] Viết `scripts/build_features.py` (28 feature V1, leakage gate)
+- [ ] Viết `scripts/preprocess_features.py` (load preprocessor.joblib, transform)
+- [ ] Viết `scripts/predict_model.py` (load MLflow/joblib, threshold=0.063357)
+- [ ] Viết `api/app.py` (FastAPI, 5 endpoints)
+- [ ] Test CLI từng script với `--data-dir data/`
+- [ ] Test API trên Swagger UI
+- [ ] Lưu sample outputs
+
+---
+
+## Nguyên tắc cốt lõi
+
+1. **Mirror FE notebook** — chỉ dùng đúng bước clean/feature mà notebook đã làm, không thêm bước mới.
+2. **Không load `returns.csv`** từ FE trở đi (leakage).
+3. **Không fit lại preprocessor** khi inference — load `preprocessor_v1_outer_train.joblib` đã fit trên outer train.
+4. **Không train lại model** — chỉ load và predict.
+5. **Fail-fast** nếu banned features xuất hiện.
+6. **Threshold cố định** = `0.063357` (locked từ Modeling validation).
+7. Tách rõ logic business/pipeline khỏi FastAPI app.

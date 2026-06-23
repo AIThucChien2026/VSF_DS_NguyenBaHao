@@ -1,9 +1,0 @@
-﻿metric,value
-row_count,384.0
-actual_mean,3142207.8966145837
-prediction_mean,3042292.448212637
-baseline_mean,3139348.5910677086
-mean_residual_actual_minus_prediction,99915.44840194557
-median_abs_error,403612.5238952744
-p90_abs_error,1230654.5989075054
-model_win_rate_vs_baseline,0.5963541666666666

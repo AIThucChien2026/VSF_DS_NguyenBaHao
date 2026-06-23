@@ -1,7 +1,0 @@
-﻿risk_check,value,status,note
-negative_prediction,0.0,PASS,Doanh thu dự báo không nên âm
-prediction_std_ratio,0.8734405873614639,PASS,"Nếu quá thấp, prediction có thể quá phẳng"
-mean_error_bias,99915.44840194558,PASS,"Dương là dự báo thấp, âm là dự báo cao"
-test_validation_wape_gap,-0.0023655693710417924,PASS,Test WAPE không nên lệch quá xa validation WAPE
-max_month_wape,0.27498204589049996,WATCH,Tháng WAPE cao nhất: 2022-11
-max_revenue_group_wape,0.2656603086055416,WATCH,Nhóm doanh thu WAPE cao nhất: low_revenue
