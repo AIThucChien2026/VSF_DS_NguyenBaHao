@@ -2,13 +2,14 @@
 """
 Script chạy 1 lần khi setup — đóng gói và đẩy full sklearn Pipeline lên MLflow Registry.
 
-Không predict gì cả. Chỉ:
-  1. Load preprocessor từ local artifact
-  2. Load model từ local bundle (final_model.joblib)
-  3. Build sklearn Pipeline 3 bước
-  4. Đẩy lên MLflow Registry với tên và alias
+Luồng:
+  1. Load preprocessor đã fit từ artifacts/
+  2. Load model đã train từ artifacts/
+  3. Build sklearn Pipeline 3 bước (feature_builder → preprocessor → classifier)
+  4. Log lên MLflow và register với tên + alias
 
-Sau khi script này chạy xong, MLflow serving có thể load và serve Pipeline đó.
+Sau khi chạy xong, app.py có thể load Pipeline bằng:
+  mlflow.sklearn.load_model("models:/customer-return-champion@champion")
 
 Chạy:
   python scripts/register_pipeline.py
@@ -38,27 +39,40 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# ─────────────────────────────────────────────────────────────────────────────
+#  CẤU HÌNH
+# ─────────────────────────────────────────────────────────────────────────────
+
 MLFLOW_TRACKING_URI     = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")
 MLFLOW_REGISTERED_MODEL = "customer-return-champion"
 MLFLOW_ALIAS            = "champion"
 
-PREPROCESSOR_PATH  = "artifacts/preprocessor_v1_outer_train.joblib"
-LOCAL_MODEL_PATH   = "artifacts/final_model.joblib"
+PREPROCESSOR_PATH = "artifacts/preprocessor_v1_outer_train.joblib"
+LOCAL_MODEL_PATH  = "artifacts/final_model.joblib"
 
+
+# ─────────────────────────────────────────────────────────────────────────────
+#  HÀM CHÍNH
+# ─────────────────────────────────────────────────────────────────────────────
 
 def register_pipeline() -> str:
     """
     Build và đẩy full sklearn Pipeline lên MLflow Registry.
 
-    Luồng:
-      load preprocessor → load model → build Pipeline → log lên MLflow → set alias
+    Pipeline được đăng ký bao gồm đầy đủ:
+      _PipelineInputAdapter (FeatureBuilder) → preprocessor → ThresholdedClassifierWrapper
+
+    Sau khi register, chỉ cần load bằng URI cố định:
+      mlflow.sklearn.load_model("models:/customer-return-champion@champion")
+    rồi gọi pipeline.predict(master_df) là cho ra nhãn 0/1.
 
     Returns:
-        model_uri: URI của model vừa register (ví dụ: models:/customer-return-champion/1)
+        model_uri: URI của model vừa register
     """
     mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
+    logger.info(f"MLflow tracking URI: {MLFLOW_TRACKING_URI}")
 
-    # ── Bước 1: Load preprocessor ──────────────────────────
+    # ── Bước 1: Load preprocessor ─────────────────────────────────────────────
     if not Path(PREPROCESSOR_PATH).exists():
         raise FileNotFoundError(
             f"Không tìm thấy preprocessor: {PREPROCESSOR_PATH}\n"
@@ -67,31 +81,33 @@ def register_pipeline() -> str:
     preprocessor = load_joblib_artifact(PREPROCESSOR_PATH)
     logger.info(f"✓ Preprocessor loaded: {PREPROCESSOR_PATH}")
 
-    # ── Bước 2: Load model từ local bundle ─────────────────
-    # Dùng local bundle vì lúc này MLflow Registry chưa có model nào
-    # Đây là lần duy nhất dùng local — sau khi register xong, mọi thứ load từ Registry
+    # ── Bước 2: Load model từ local bundle ────────────────────────────────────
+    # Đây là lần duy nhất load từ local — sau khi register xong thì mọi thứ
+    # đều load từ MLflow Registry, không dùng local nữa
     if not Path(LOCAL_MODEL_PATH).exists():
         raise FileNotFoundError(
             f"Không tìm thấy model bundle: {LOCAL_MODEL_PATH}\n"
             f"Chạy bootstrap_report_assets.py trước."
         )
     bundle = load_joblib_artifact(LOCAL_MODEL_PATH)
+
     if isinstance(bundle, dict) and "model" in bundle:
         model  = bundle["model"]
         flavor = "joblib"
-        logger.info(f"✓ Model loaded từ bundle: {LOCAL_MODEL_PATH}")
+        logger.info(f"✓ Model loaded từ bundle dict: {LOCAL_MODEL_PATH}")
     else:
         model  = bundle
         flavor = "sklearn"
-        logger.info(f"✓ Model loaded: {LOCAL_MODEL_PATH}")
+        logger.info(f"✓ Model loaded trực tiếp: {LOCAL_MODEL_PATH}")
 
-    # Trích xuất classifier thực tế nếu model là Pipeline (tránh lỗi preprocessor lồng nhau)
+    # Nếu model là Pipeline lồng (preprocessor bên trong) → chỉ lấy classifier
     if hasattr(model, "steps"):
-        logger.info(f"✓ Trích xuất classifier thực tế từ Pipeline: step '{model.steps[-1][0]}'")
+        logger.info(
+            f"✓ Trích xuất classifier từ Pipeline lồng: '{model.steps[-1][0]}'"
+        )
         model = model.steps[-1][1]
 
-
-    # ── Bước 3: Build full sklearn Pipeline ────────────────
+    # ── Bước 3: Build sklearn Pipeline hoàn chỉnh ────────────────────────────
     pipeline = build_full_sklearn_pipeline(
         preprocessor=preprocessor,
         model=model,
@@ -100,29 +116,34 @@ def register_pipeline() -> str:
     )
     logger.info(
         f"✓ Pipeline built — steps: "
-        f"feature_builder → preprocessor → classifier (threshold={LOCKED_THRESHOLD})"
+        f"feature_builder (adapter) → preprocessor → "
+        f"classifier (threshold={LOCKED_THRESHOLD})"
     )
 
-    # ── Bước 4: Log lên MLflow và register ─────────────────
-    # Dùng 1 run ngắn chỉ để log model, không log metrics hay params vì chưa có data
+    # ── Bước 4: Log lên MLflow và register ───────────────────────────────────
+    # Đóng gói scripts/ cùng với model để MLflow serving có thể tái tạo
+    # FeatureBuilder, _PipelineInputAdapter, ThresholdedClassifierWrapper
     with mlflow.start_run(run_name="register_pipeline") as run:
         model_info = mlflow.sklearn.log_model(
             sk_model=pipeline,
             artifact_path="sk_pipeline",
             registered_model_name=MLFLOW_REGISTERED_MODEL,
-            # code_paths đóng gói inference_pipeline.py kèm theo model.pkl
-            # MLflow serving cần file này để tái tạo FeatureBuilder và ThresholdedClassifierWrapper
+            serialization_format="cloudpickle",
             code_paths=["scripts/"],
-           # code_paths=["scripts/inference_pipeline.py"],
         )
         run_id = run.info.run_id
         logger.info(f"✓ Pipeline logged — run_id: {run_id}")
 
-    # ── Bước 5: Set alias @champion ────────────────────────
-    # Alias cho phép load bằng URI cố định: models:/customer-return-champion@champion
-    # Không cần biết version number thay đổi sau mỗi lần register
+    # ── Bước 5: Set alias @champion ──────────────────────────────────────────
+    # Alias cho phép load bằng URI cố định không phụ thuộc version number:
+    #   models:/customer-return-champion@champion
     client = mlflow.MlflowClient()
-    latest_version = client.get_registered_model(MLFLOW_REGISTERED_MODEL).latest_versions[0].version
+    latest_version = (
+        client
+        .get_registered_model(MLFLOW_REGISTERED_MODEL)
+        .latest_versions[0]
+        .version
+    )
     client.set_registered_model_alias(
         name=MLFLOW_REGISTERED_MODEL,
         alias=MLFLOW_ALIAS,
@@ -131,17 +152,19 @@ def register_pipeline() -> str:
 
     model_uri = f"models:/{MLFLOW_REGISTERED_MODEL}@{MLFLOW_ALIAS}"
     logger.info(
-        f"\n{'='*55}\n"
+        f"\n{'='*60}\n"
         f"  ✓ Pipeline đã được register thành công!\n"
-        f"  • Model name  : {MLFLOW_REGISTERED_MODEL}\n"
-        f"  • Version     : {latest_version}\n"
-        f"  • Alias       : @{MLFLOW_ALIAS}\n"
-        f"  • URI         : {model_uri}\n"
-        f"  • MLflow UI   : {MLFLOW_TRACKING_URI}/#/models/{MLFLOW_REGISTERED_MODEL}\n"
+        f"  • Model name : {MLFLOW_REGISTERED_MODEL}\n"
+        f"  • Version    : {latest_version}\n"
+        f"  • Alias      : @{MLFLOW_ALIAS}\n"
+        f"  • URI        : {model_uri}\n"
+        f"  • MLflow UI  : {MLFLOW_TRACKING_URI}/#/models/{MLFLOW_REGISTERED_MODEL}\n"
         f"\n"
-        f"  Bước tiếp theo — khởi động MLflow serving:\n"
-        f"  mlflow models serve -m \"{model_uri}\" --port 8001 --no-conda\n"
-        f"{'='*55}"
+        f"  Load trong app.py:\n"
+        f"    import mlflow.sklearn\n"
+        f"    pipeline = mlflow.sklearn.load_model(\"{model_uri}\")\n"
+        f"    predictions = pipeline.predict(master_df)\n"
+        f"{'='*60}"
     )
 
     return model_uri
