@@ -75,7 +75,7 @@ Dữ liệu thô (CSV)
 
 **Input:** Ma trận số đã chuẩn hóa và làm sạch
 
-**Thực hiện:** Thực hiện load model pkl và ngưỡng dự đoán từ thư mục `artifacts/`, sau đó thực hiện dự đoán xác suất hoàn trả và gán nhãn 0/1.
+**Thực hiện:** bọc quy trình (model.predict_proba() → so sánh với ngưỡng và trả kết quả dự đoán)
 
 **Output:** Nhãn dự đoán (0 = không hoàn trả, 1 = hoàn trả) kèm xác suất.
 
@@ -85,7 +85,7 @@ Dữ liệu thô (CSV)
 
 **Input:** sklearn pipeline và model đã huấn luyện từ thư mục `artifacts/`
 
-**Thực hiện:** đóng gói (sklearn pipeline + model pkl) và đưa lên MLflow
+**Thực hiện:** Load model đã train từ thư mục artifacts/, sau đó thực hiện đóng gói (sklearn pipeline + model pkl) và đưa lên MLflow
 
 **Output:** Pipeline được lưu tại URI `models:/customer-return-champion@champion`, có thể load lại bất cứ lúc nào.
 
