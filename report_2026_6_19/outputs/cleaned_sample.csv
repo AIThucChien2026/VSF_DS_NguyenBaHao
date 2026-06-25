@@ -1,6 +1,0 @@
-order_id,customer_id,order_date,signup_date,payment_method,device_type,order_source,payment_value,is_cod,customer_tenure_days,age_group,gender,total_quantity,unique_product_count,total_discount_amount,total_gross_value,discount_ratio,is_discounted,category_Casual,category_GenZ,category_Outdoor,category_Streetwear,segment_Activewear,segment_Balanced,segment_Everyday,segment_Performance,segment_Premium,segment_Standard,size_L,size_M,size_S,size_XL
-1,58578,2012-07-04,2020-06-06,credit_card,desktop,paid_search,7967.54,0,-2894,35-44,Female,7,1,0.0,7967.54,0.0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0
-2,58621,2012-07-04,2021-11-03,cod,mobile,paid_search,71163.75,0,-3409,18-24,Female,7,1,0.0,71163.75,0.0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0
-3,58811,2012-07-04,2020-09-18,credit_card,desktop,direct,33660.99,0,-2998,35-44,Female,3,1,0.0,33660.99,0.0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0
-4,59453,2012-07-04,2016-05-29,credit_card,desktop,referral,53196.25,0,-1425,45-54,Male,5,1,0.0,53196.25,0.0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1
-6,57821,2012-07-06,2017-07-11,paypal,mobile,email_campaign,1597.84,0,-1831,18-24,Male,1,1,0.0,1597.84,0.0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1

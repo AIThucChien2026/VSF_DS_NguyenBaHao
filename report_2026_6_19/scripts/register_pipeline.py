@@ -8,16 +8,14 @@ Luồng:
   3. Build sklearn Pipeline 3 bước (feature_builder → preprocessor → classifier)
   4. Log lên MLflow và register với tên + alias
 
-Sau khi chạy xong, app.py có thể load Pipeline bằng:
-  mlflow.sklearn.load_model("models:/customer-return-champion@champion")
-
 Chạy:
-  python scripts/register_pipeline.py
+  python scripts/register_pipeline.py --uri http://localhost:5000
 """
 
 import logging
 import os
 import sys
+import argparse  # BỔ SUNG: Thư viện đọc tham số dòng lệnh
 from pathlib import Path
 
 if __package__ in (None, ""):
@@ -40,12 +38,10 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # ─────────────────────────────────────────────────────────────────────────────
-#  CẤU HÌNH
+#  CẤU HÌNH MẶC ĐỊNH
 # ─────────────────────────────────────────────────────────────────────────────
-
-MLFLOW_TRACKING_URI     = os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000")
 MLFLOW_REGISTERED_MODEL = "customer-return-champion"
-MLFLOW_ALIAS            = "champion"
+MLFLOW_ALIAS             = "champion"
 
 PREPROCESSOR_PATH = "artifacts/preprocessor_v1_outer_train.joblib"
 LOCAL_MODEL_PATH  = "artifacts/final_model.joblib"
@@ -55,22 +51,13 @@ LOCAL_MODEL_PATH  = "artifacts/final_model.joblib"
 #  HÀM CHÍNH
 # ─────────────────────────────────────────────────────────────────────────────
 
-def register_pipeline() -> str:
+def register_pipeline(tracking_uri: str) -> str:
     """
     Build và đẩy full sklearn Pipeline lên MLflow Registry.
-
-    Pipeline được đăng ký bao gồm đầy đủ:
-      _PipelineInputAdapter (FeatureBuilder) → preprocessor → ThresholdedClassifierWrapper
-
-    Sau khi register, chỉ cần load bằng URI cố định:
-      mlflow.sklearn.load_model("models:/customer-return-champion@champion")
-    rồi gọi pipeline.predict(master_df) là cho ra nhãn 0/1.
-
-    Returns:
-        model_uri: URI của model vừa register
     """
-    mlflow.set_tracking_uri(MLFLOW_TRACKING_URI)
-    logger.info(f"MLflow tracking URI: {MLFLOW_TRACKING_URI}")
+    # Ép MLflow set đúng địa chỉ URI nhận vào từ tham số
+    mlflow.set_tracking_uri(tracking_uri)
+    logger.info(f"MLflow tracking URI được thiết lập: {tracking_uri}")
 
     # ── Bước 1: Load preprocessor ─────────────────────────────────────────────
     if not Path(PREPROCESSOR_PATH).exists():
@@ -82,8 +69,6 @@ def register_pipeline() -> str:
     logger.info(f"✓ Preprocessor loaded: {PREPROCESSOR_PATH}")
 
     # ── Bước 2: Load model từ local bundle ────────────────────────────────────
-    # Đây là lần duy nhất load từ local — sau khi register xong thì mọi thứ
-    # đều load từ MLflow Registry, không dùng local nữa
     if not Path(LOCAL_MODEL_PATH).exists():
         raise FileNotFoundError(
             f"Không tìm thấy model bundle: {LOCAL_MODEL_PATH}\n"
@@ -100,7 +85,6 @@ def register_pipeline() -> str:
         flavor = "sklearn"
         logger.info(f"✓ Model loaded trực tiếp: {LOCAL_MODEL_PATH}")
 
-    # Nếu model là Pipeline lồng (preprocessor bên trong) → chỉ lấy classifier
     if hasattr(model, "steps"):
         logger.info(
             f"✓ Trích xuất classifier từ Pipeline lồng: '{model.steps[-1][0]}'"
@@ -121,8 +105,6 @@ def register_pipeline() -> str:
     )
 
     # ── Bước 4: Log lên MLflow và register ───────────────────────────────────
-    # Đóng gói scripts/ cùng với model để MLflow serving có thể tái tạo
-    # FeatureBuilder, _PipelineInputAdapter, ThresholdedClassifierWrapper
     with mlflow.start_run(run_name="register_pipeline") as run:
         model_info = mlflow.sklearn.log_model(
             sk_model=pipeline,
@@ -135,8 +117,6 @@ def register_pipeline() -> str:
         logger.info(f"✓ Pipeline logged — run_id: {run_id}")
 
     # ── Bước 5: Set alias @champion ──────────────────────────────────────────
-    # Alias cho phép load bằng URI cố định không phụ thuộc version number:
-    #   models:/customer-return-champion@champion
     client = mlflow.MlflowClient()
     latest_version = (
         client
@@ -158,7 +138,7 @@ def register_pipeline() -> str:
         f"  • Version    : {latest_version}\n"
         f"  • Alias      : @{MLFLOW_ALIAS}\n"
         f"  • URI        : {model_uri}\n"
-        f"  • MLflow UI  : {MLFLOW_TRACKING_URI}/#/models/{MLFLOW_REGISTERED_MODEL}\n"
+        f"  • MLflow UI  : {tracking_uri}/#/models/{MLFLOW_REGISTERED_MODEL}\n"
         f"\n"
         f"  Load trong app.py:\n"
         f"    import mlflow.sklearn\n"
@@ -171,8 +151,21 @@ def register_pipeline() -> str:
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Đăng ký Sklearn Pipeline lên MLflow Server.")
+    
+    parser.add_argument(
+        "--uri",
+        type=str,
+        # Nếu gõ lệnh không truyền --uri, script tự tìm biến môi trường, không thấy nữa sẽ lấy localhost mặc định
+        default=os.getenv("MLFLOW_TRACKING_URI", "http://localhost:5000"),
+        help="Địa chỉ Tracking URI của MLflow Server"
+    )
+    
+    args = parser.parse_args()
+
     try:
-        register_pipeline()
+        # Truyền chính xác URI đã phân tách vào hàm xử lý
+        register_pipeline(tracking_uri=args.uri)
     except Exception as e:
         logger.error(f"Register thất bại: {e}")
         sys.exit(1)

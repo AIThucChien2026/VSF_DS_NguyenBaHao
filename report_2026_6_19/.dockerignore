@@ -1,0 +1,29 @@
+# Bỏ qua toàn bộ các thư mục cache của Python
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Bỏ qua các thư mục ẩn của IDE và hệ thống
+.git/
+.gitignore
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Bỏ qua các file tài liệu không cần cho việc chạy API
+**/README*.md
+**/sample_request.json
+
+# Bỏ qua các file mô hình cũ/thử nghiệm trong artifacts (nếu có)
+# Chỉ giữ lại đúng file model chính mà API load (ví dụ: final_model.joblib nếu dùng local)
+# Nếu bạn đã cấu hình để API chạy offline thông qua MLFLOW_MODEL_URI trỏ vào thư mục artifacts,
+# và bạn biết chắc chắn mình chỉ cần file nào, bạn có thể loại trừ các file joblib thử nghiệm khác:
+# **/artifacts/logistic_tuned.joblib
+# **/artifacts/random_forest_tuned.joblib
+
+# Bỏ qua dữ liệu thô (.csv, .xlsx) nếu lỡ tay để trong thư mục dự án
+**/*.csv
+**/*.xlsx
+**/*.pkl

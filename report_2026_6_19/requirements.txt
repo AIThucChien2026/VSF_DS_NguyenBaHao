@@ -1,0 +1,13 @@
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+tabulate
+lightgbm
+joblib
+httpx
+scikit-learn==1.7.2
+fastapi
+uvicorn
+mlflow

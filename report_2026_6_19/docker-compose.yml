@@ -1,68 +1,25 @@
 services:
-
-  # ── 1. MLflow Tracking Server ────────────────────────────
-  mlflow_server:
-    image: ghcr.io/mlflow/mlflow:v3.11.1-full
-    container_name: mlflow_server
-    ports:
-      - "5000:5000"
-    volumes:
-      - mlflow_data:/mlflow
-    command: >
-      mlflow server
-      --host 0.0.0.0
-      --port 5000
-      --backend-store-uri sqlite:////mlflow/mlflow.db
-      --default-artifact-root mlflow-artifacts:/
-      --artifacts-destination /mlflow/artifacts
-      --serve-artifacts
-      --allowed-hosts "*"
-    healthcheck:
-      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/health').read()"]
-      interval: 10s
-      timeout: 5s
-      retries: 12
-      start_period: 10s
-
-  # ── 2. Register Pipeline (chạy 1 lần rồi exit) ───────────
-  register_pipeline:
-    build:
-      context: ..                                   # Build context = VinuniDatathon/
-      dockerfile: report_2026_6_19/dockerfile       # Dockerfile trong thư mục con
-    container_name: register_pipeline
-    depends_on:
-      mlflow_server:
-        condition: service_healthy
-    working_dir: /app/report_2026_6_19             # Làm việc trong thư mục con
-    volumes:
-      - ../:/app                                    # Mount VinuniDatathon/ vào /app
-    environment:
-      MLFLOW_TRACKING_URI: http://mlflow_server:5000
-      PYTHONUNBUFFERED: "1"
-    command: python scripts/register_pipeline.py
-    restart: on-failure
-
-  # ── 3. FastAPI App ────────────────────────────────────────
   api:
     build:
-      context: ..                                   # Build context = VinuniDatathon/
-      dockerfile: report_2026_6_19/dockerfile
+      context: .
+      dockerfile: Dockerfile
+    image: customer-return-api:local
     container_name: api
     ports:
       - "8000:8000"
-    depends_on:
-      mlflow_server:
-        condition: service_healthy
-      register_pipeline:
-        condition: service_completed_successfully   # Chờ register xong mới start
-    working_dir: /app/report_2026_6_19             # Làm việc trong thư mục con
+    
+    # 1. SỬA LẠI THƯ MỤC LÀM VIỆC GỐC: Đưa thẳng về /app
+    working_dir: /app
+    
+    # 2. SỬA LẠI VOLUMES: Mount thư mục hiện tại vào đúng gốc /app
     volumes:
-      - ../:/app                                    # Mount VinuniDatathon/ vào /app
+      - .:/app
+      
     environment:
-      MLFLOW_TRACKING_URI: http://mlflow_server:5000
-      MLFLOW_MODEL_URI: models:/customer-return-champion@champion
-      PYTHONUNBUFFERED: "1"
+      - PYTHONPATH=.                                
+      - MLFLOW_TRACKING_URI=http://host.docker.internal:5000
+      - MLFLOW_MODEL_URI=models:/customer-return-champion@champion
+      - PYTHONUNBUFFERED=1
+      
+    # 3. Giữ nguyên lệnh uvicorn này, nó sẽ quét thư mục api nằm trực tiếp trong /app
     command: uvicorn api.app:app --host 0.0.0.0 --port 8000
-
-volumes:
-  mlflow_data:

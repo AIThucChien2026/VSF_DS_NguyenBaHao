@@ -1,3 +1,41 @@
+# FROM ghcr.io/mlflow/mlflow:v3.11.1-full
+
+# WORKDIR /app
+
+# # LightGBM trên Linux cần libgomp1 (OpenMP)
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends libgomp1 && \
+#     rm -rf /var/lib/apt/lists/*
+
+# # requirements.txt nằm ở VinuniDatathon/ (context là ..)
+# COPY requirements.txt /tmp/requirements.txt
+# RUN pip install --no-cache-dir --upgrade pip && \
+#     pip install --no-cache-dir -r /tmp/requirements.txt
+
+# ENV PYTHONUNBUFFERED=1
+
+# # Copy mã nguồn vào image (path tương đối với context = VinuniDatathon/)
+# FROM ghcr.io/mlflow/mlflow:v3.11.1-full
+
+# WORKDIR /app
+
+# # LightGBM trên Linux cần libgomp1 (OpenMP)
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends libgomp1 && \
+#     rm -rf /var/lib/apt/lists/*
+
+# # requirements.txt nằm ở VinuniDatathon/ (context là ..)
+# COPY requirements.txt /tmp/requirements.txt
+# RUN pip install --no-cache-dir --upgrade pip && \
+#     pip install --no-cache-dir -r /tmp/requirements.txt
+
+# ENV PYTHONUNBUFFERED=1
+
+# # Copy mã nguồn vào image (path tương đối với context = VinuniDatathon/)
+# COPY report_2026_6_19/artifacts/      /app/report_2026_6_19/artifacts/
+# COPY report_2026_6_19/api/      /app/report_2026_6_19/api/
+# COPY report_2026_6_19/scripts/  /app/report_2026_6_19/scripts/
+
 FROM ghcr.io/mlflow/mlflow:v3.11.1-full
 
 WORKDIR /app
@@ -7,13 +45,12 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends libgomp1 && \
     rm -rf /var/lib/apt/lists/*
 
-# requirements.txt nằm ở VinuniDatathon/ (context là ..)
+# requirements.txt hiện tại đã nằm cùng cấp với dockerfile
 COPY requirements.txt /tmp/requirements.txt
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r /tmp/requirements.txt
 
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONUNBUFFERED=1  
+# copy code app.py
 
-# Copy mã nguồn vào image (path tương đối với context = VinuniDatathon/)
-COPY report_2026_6_19/api/      /app/report_2026_6_19/api/
-COPY report_2026_6_19/scripts/  /app/report_2026_6_19/scripts/
+COPY api/            /app/report_2026_6_19/api/

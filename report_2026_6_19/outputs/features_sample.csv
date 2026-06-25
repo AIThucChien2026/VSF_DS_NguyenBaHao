@@ -1,6 +1,0 @@
-customer_tenure_days,total_quantity,unique_product_count,discount_ratio,log_payment_value,payment_method,device_type,order_source,tenure_group,age_group,gender,is_cod,is_discounted,category_Casual,category_GenZ,category_Outdoor,category_Streetwear,segment_Activewear,segment_Balanced,segment_Everyday,segment_Performance,segment_Premium,segment_Standard,size_L,size_M,size_S,size_XL,payment_value
--2894,7,1,0.0,8.983256568052415,credit_card,desktop,paid_search,,35-44,Female,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,7967.54
--3409,7,1,0.0,11.172752890535723,cod,mobile,paid_search,,18-24,Female,0,0,0,0,0,1,0,0,1,0,0,0,0,1,0,0,71163.75
--2998,3,1,0.0,10.424124586615186,credit_card,desktop,direct,,35-44,Female,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,33660.99
--1425,5,1,0.0,10.881761982264349,credit_card,desktop,referral,,45-54,Male,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,1,53196.25
--1831,1,1,0.0,7.377033645288277,paypal,mobile,email_campaign,,18-24,Male,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,1597.84
