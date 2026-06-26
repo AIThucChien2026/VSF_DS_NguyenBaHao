@@ -3,11 +3,9 @@
 
 ---
 
-**Người thực hiện:** Nguyễn Bá Hào
-
-**Thời gian báo cáo:** Tháng 6/2026
-
-**Tech stack:** Python, Pandas, Scikit-learn, LightGBM, MLflow, FastAPI
+**Người thực hiện:** Nguyễn Bá Hào.
+**Thời gian báo cáo:** Tháng 6/2026.
+**Tech stack:** Python, Pandas, Scikit-learn, LightGBM, MLflow, FastAPI.
 
 ---
 
