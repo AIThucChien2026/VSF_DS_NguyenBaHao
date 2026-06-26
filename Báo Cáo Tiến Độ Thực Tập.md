@@ -240,11 +240,11 @@ Phân chia theo thứ tự thời gian (temporal split):
 
 So sánh 3 model đã tuned trên outer validation, kết hợp đánh giá temporal stability qua 3 fold thời gian:
 
-| Model | PR-AUC (validation) | ROC-AUC | Mean Fold PR-AUC | Std Fold PR-AUC |
-|---|---|---|---|---|
-| **LightGBM Tuned** | **0.082374** | **0.552626** | **0.086250** | **0.002915** |
-| Logistic Regression Tuned | — | — | — | — |
-| Random Forest Tuned | — | — | — | — |
+| Model | PR-AUC | ROC-AUC | Precision | Recall | F1 | Threshold | Mean Fold PR-AUC | Std Fold PR-AUC |
+|---|---|---|---|---|---|---|---|---|
+| **LightGBM Tuned** | **0.082374** | **0.552626** | **0.108733** | **0.240394** | **0.149738** | **0.063357** | **0.086250** | **0.002380** |
+| Logistic Regression Tuned | 0.080880 | 0.550467 | 0.109349 | 0.237554 | 0.149761 | 0.605029 | 0.086350 | 0.001751 |
+| Random Forest Tuned | 0.081616 | 0.553099 | 0.108905 | 0.239826 | 0.149790 | 0.503857 | 0.084661 | 0.003014 |
 
 **Champion: LightGBM Tuned** — được chọn theo validation PR-AUC và temporal stability.
 
