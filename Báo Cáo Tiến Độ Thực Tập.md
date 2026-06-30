@@ -237,7 +237,7 @@ Phân chia theo thứ tự thời gian (temporal split):
 | Logistic Regression | GridSearchCV | 2 configs | 0.086350 (C=0.1, balanced, l2) |
 | Random Forest | RandomizedSearchCV | 5 configs | 0.084661 (250 trees, depth=8, balanced_subsample) |
 | LightGBM | Bayesian (Optuna) | 15 trials | ~0.086532 |
-| XGBoost | RandomizedSearchCV | 5 configs | 0.082531 | (n_estimators=200, depth=3, learning_rate=0.05, subsample=0.85) |
+| XGBoost | RandomizedSearchCV | 5 configs | 0.082531 (n_estimators=200, depth=3, learning_rate=0.05, subsample=0.85) |
 
 ### 4.5 Chọn model Champion
 
