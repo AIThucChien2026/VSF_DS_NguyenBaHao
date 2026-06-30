@@ -5,7 +5,7 @@
 
 **Người thực hiện:** Nguyễn Bá Hào
 **Thời gian báo cáo:** Tháng 6/2026
-**Tech stack:** Python, Pandas, Scikit-learn, LightGBM, MLflow, FastAPI
+**Tech stack:** Python, Pandas, Scikit-learn, LightGBM, XGBoost, MLflow, FastAPI
 
 ---
 
@@ -212,13 +212,15 @@ Phân chia theo thứ tự thời gian (temporal split):
 | Dummy (prior) | 0.063723 | 0.500000 | Mốc tham chiếu tối thiểu |
 | Core Logistic (2 feature: is_cod, payment_method) | 0.076408 | 0.553883 | Mốc baseline nghiệp vụ |
 
-### 4.2 Huấn luyện model ban đầu (3 model, 28 feature V1)
+### 4.2 Huấn luyện model ban đầu (4 model, 28 feature V1)
 
 | Model | PR-AUC | ROC-AUC |
 |---|---|---|
 | Logistic Regression | 0.080873 | 0.550431 |
 | Random Forest | 0.080320 | 0.547571 |
 | LightGBM | 0.078067 | 0.538708 |
+| XGBoost | 0.075112 | 0.532050 |
+
 
 ### 4.3 Phân tích threshold
 
@@ -232,6 +234,7 @@ Phân chia theo thứ tự thời gian (temporal split):
 | Logistic Regression | GridSearchCV | 2 configs | 0.086350 (C=0.1, balanced, l2) |
 | Random Forest | RandomizedSearchCV | 5 configs | 0.084661 (250 trees, depth=8, balanced_subsample) |
 | LightGBM | Bayesian (Optuna) | 15 trials | ~0.086532 |
+| XGBoost | RandomizedSearchCV | 5 configs | 0.082531 | (n_estimators=200, depth=3, learning_rate=0.05, subsample=0.85) |
 
 ### 4.5 Chọn model Champion
 
@@ -240,6 +243,7 @@ So sánh 3 model đã tuned trên outer validation, kết hợp đánh giá temp
 | Model | PR-AUC (validation) | ROC-AUC | Mean Fold PR-AUC | Std Fold PR-AUC |
 |---|---|---|---|---|
 | **LightGBM Tuned** | **0.082374** | **0.552626** | **0.086250** | **0.002915** |
+| XGBoost Tuned | — | — | — | — |
 | Logistic Regression Tuned | — | — | — | — |
 | Random Forest Tuned | — | — | — | — |
 
